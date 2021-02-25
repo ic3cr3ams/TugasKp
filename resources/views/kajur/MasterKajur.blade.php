@@ -41,7 +41,7 @@
             TOP BAR CONTENT & NOTIFICATIONS
             *********************************************************************************************************************************************************** -->
         <!--header start-->
-        <header class="header black-bg">
+        <header class="header black-bg" style="background-color:#192D35;">
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
@@ -60,7 +60,7 @@
             *********************************************************************************************************************************************************** -->
         <!--sidebar start-->
         <aside>
-            <div id="sidebar" class="nav-collapse ">
+            <div id="sidebar" class="nav-collapse "style="background-color:#224350;">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
                 <h5 class="centered">Nama Dosen Login</h5>
@@ -102,7 +102,10 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <button class="btn btn-success"><i class="fa fa-download"></i> Download Pedoman Silabus</button>
+                    <a class="{{ (url()->current() == url("/kajur/cetak")) ? 'active' : '' }}" href="/kajur/cetak">
+                    <i class="fa fa-download"></i> 
+                    <span> Pedoman Silabus</span>
+                    </a>
                 </li>
             </div>
         </aside>

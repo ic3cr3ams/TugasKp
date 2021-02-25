@@ -17,7 +17,7 @@
 
 <body>
     <section id="container">
-        <header class="header"style="background-color:#440000;">
+        <header class="header"style="background-color:#192D35;">
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
@@ -28,7 +28,7 @@
         </header>
 
         <aside>
-            <div id="sidebar" class="nav-collapse " style="background-color:#440000;">
+            <div id="sidebar" class="nav-collapse " style="background-color:#224350;">
                 <ul class="sidebar-menu" id="nav-accordion">
                 <h5 class="centered">Welcome,Admin BAA</h5>
                 <li class="sub-menu">
@@ -50,10 +50,16 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <button class="btn btn-success"><i class="fa fa-download"></i> Report Pengisian Silabus</button>
+                    <a class="{{ (url()->current() == url("/admin/Assign")) ? 'active' : '' }}" href="/admin/Assign">
+                    <i class="fa fa-download"></i> 
+                    <span> Pengisian Silabus </span>
+                </a>
                 </li>
                 <li class="sub-menu">
-                    <button class="btn btn-info"><i class="fa fa-external-link-square"></i> Export Deskripsi Mata Kuliah</button>
+                    <a class="{{ (url()->current() == url("/admin/Assign")) ? 'active' : '' }}" href="/admin/Assign">
+                    <i class="fa fa-external-link-square"></i> 
+                    <span> Deskripsi Mata Kuliah</span>
+                    </a>
                 </li>
             </div>
         </aside>
@@ -61,7 +67,7 @@
         <footer class="site-footer">
             <div class="text-center">
                 <p>
-
+                    
                 </p>
                 <div class="credits">
                 </div>

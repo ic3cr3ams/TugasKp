@@ -9,7 +9,7 @@
               <!-- BASIC FORM ELELEMNTS -->
               <div class="row mt">
                 <div class="col-lg-12">
-                  <div class="form-panel">
+                  <div class="form-panel" style="border-radius: 25px;">
                     <h4 class="mb"><i class="fa fa-sign-in"></i> Login Sebagai Dosen</h4>
                     <form class="form-horizontal style-form" method="get">
                       <div class="form-group">
@@ -29,15 +29,11 @@
                           </div>
                       </div>
                     </form>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-panel">
                     <h4 class="mb"><i class="fa fa-upload"></i> Upload Pedoman Silabus</h4>
                     <div class="form-group">
                       <div class="controls col-md-9">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
-                          <span class="btn btn-theme02 btn-file">
+                          <span class="btn btn-theme02 btn-file btn-round">
                             <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select file</span>
                           <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
                           <input type="file" class="default" />
@@ -46,9 +42,6 @@
                           <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
                         </div>
                       </div>
-                    </div>
-                    <br>
-                    <div class="col-sm-2">
                     </div>
                   </div>
                 </div>

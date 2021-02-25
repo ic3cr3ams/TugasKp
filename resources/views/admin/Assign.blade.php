@@ -6,18 +6,18 @@
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                <form>
-                    <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
-                    <div class="form-group row">
-                        <div class="col-sm-5">
-                            <select class="form-control form-control-md">
-                                <option>Small select</option>
-                              </select>
+                    <form>
+                        <div class="form-row col-sm-9">
+                            <div class="form-group col-md-2">
+                              <input type="text" class="form-control" id="inputSeacrh" placeholder="Nama Mata Kuliah">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn mb-2" style="background-color: #afec85"><i class="fa fa-search"></i> Cari</button>
+                              </div>
                         </div>
-                      </div>
-                </form>
+                    </form>
                 <form>
-                    <label style="color: black"><i class="fa fa-filter"></i> <b>Filter</b></label>
+                    <label style="color: black;font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
                     <div class="form-group row">
                         <div class="col-sm-3">
                         <label>
@@ -35,13 +35,23 @@
                 </form>
             </div>
                 <div class="content-panel">
+                    <form class="col-sm-10">
+                        <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
+                        <div class="form-group row">
+                            <div class="col-sm-5">
+                                <select class="form-control form-control-md">
+                                    <option>Small select</option>
+                                  </select>
+                            </div>
+                          </div>
+                    </form>
                     <table class="table table-striped table-advance table-hover">
                         <thead>
                             <tr>
                                 <th></th>
                                 <th>Mata Kuliah</th>
                                 <th>Program Studi</th>
-                                <th>Deskripsi</th>
+                                <th>Kurikulum</th>
                                 <th>Dosen</th>
                             </tr>
                         </thead>
