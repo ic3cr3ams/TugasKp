@@ -52,29 +52,16 @@
                     </div>
                   </div>
                 </div>
-                <!-- col-lg-12-->
               </div>
-                <!-- /content-panel -->
             </div>
         </div>
         <!-- /row -->
     </section>
 </section>
-    <!-- /MAIN CONTENT -->
-    <!--main content end-->
-    <!--footer start-->
-  <!-- js placed at the end of the document so the pages load faster -->
-  @push('js')
   <script src="{{asset('asset/admin/lib/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('asset/admin/lib/bootstrap/js/bootstrap.min.js')}}"></script>
   <script class="include" type="text/javascript" src="{{asset('asset/admin/lib/jquery.dcjqaccordion.2.7.js')}}"></script>
   <script src="{{asset('asset/admin/lib/jquery.scrollTo.min.js')}}"></script>
   <script src="{{asset('asset/admin/lib/jquery.nicescroll.js')}}" type="text/javascript"></script>
-  <!--common script for all pages-->
   <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
-  <!--script for this page-->
-
-
-  @endpush
-
   @endsection

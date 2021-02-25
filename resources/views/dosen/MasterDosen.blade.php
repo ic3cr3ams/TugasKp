@@ -27,49 +27,26 @@
     <link href="{{ asset('asset/admin/css/style.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('asset/admin/css/style-responsive.css') }}" rel="stylesheet"> --}}
 
-    <!-- =======================================================
-        Template Name: Dashio
-        Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-        Author: TemplateMag.com
-        License: https://templatemag.com/license/
-    ======================================================= -->
+
 </head>
 
 <body>
     <section id="container">
-        <!-- **********************************************************************************************************************************************************
-            TOP BAR CONTENT & NOTIFICATIONS
-            *********************************************************************************************************************************************************** -->
-        <!--header start-->
+                    {{-- Header --}}
         <header class="header black-bg">
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
-        <!--logo start-->
-            {{-- <img src="{{asset('asset/admin/img/logo-istts.png')}}" alt="" srcset="" class="rounded float-left"> --}}
             <a href="/dosen/Home" class="logo"><b><span><img src="{{asset('images/stts.png')}}" class="float-center" width="40" height="40"></span><span> Silabus ISTTS</span> </b></a>
-            <!--logo end-->
-
             <ul class="nav pull-right top-menu">
                 <a class="btn btn-danger btn-sm mt-3" href="/">Logout</a>
             </ul>
         </header>
-        <!--header end-->
-        <!-- **********************************************************************************************************************************************************
-            MAIN SIDEBAR MENU
-            *********************************************************************************************************************************************************** -->
-        <!--sidebar start-->
+
         <aside>
             <div id="sidebar" class="nav-collapse ">
-                <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
                 <h5 class="centered">Nama Dosen Login</h5>
-                {{-- <li class="mt">
-                    <a class="{{ (url()->current() == url("/admin/index")) ? 'active' : '' }}" href="index">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Home</span>
-                    </a>
-                </li> --}}
                 <li class="sub-menu">
                     <a class="{{ (url()->current() == url("/dosen/Home")) ? 'active' : '' }}" href="/dosen/Home">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
