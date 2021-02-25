@@ -46,7 +46,8 @@
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
         <!--logo start-->
-            <a href="/admin/Home" class="logo"><b><span><img src="{{asset('images/stts.png')}}" class="float-center" width="40" height="40"></span><span> Silabus ISTTS</span> </b></a>
+            {{-- <img src="{{asset('asset/admin/img/logo-istts.png')}}" alt="" srcset="" class="rounded float-left"> --}}
+            <a href="/dosen/Home" class="logo"><b><span><img src="{{asset('images/stts.png')}}" class="float-center" width="40" height="40"></span><span> Silabus ISTTS</span> </b></a>
             <!--logo end-->
 
             <ul class="nav pull-right top-menu">
@@ -60,31 +61,29 @@
         <!--sidebar start-->
         <aside>
             <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                <h5 class="centered">Welcome,Admin BAA</h5>
-                <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/Home")) ? 'active' : '' }}" href="/admin/Home">
-                    <i class="fa fa-home" aria-hidden="true"></i>
+                <h5 class="centered">Nama Dosen Login</h5>
+                {{-- <li class="mt">
+                    <a class="{{ (url()->current() == url("/admin/index")) ? 'active' : '' }}" href="index">
+                    <i class="fa fa-dashboard"></i>
                     <span>Home</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/MataKuliah")) ? 'active' : '' }}" href="/admin/MataKuliah">
-                    <i class="fa fa-file-text"></i>
-                    <span>Mata Kuliah</span>
+                    <a class="{{ (url()->current() == url("/dosen/Home")) ? 'active' : '' }}" href="/dosen/Home">
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                    <span>Mata Kuliah Yang Diajar</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/Assign")) ? 'active' : '' }}" href="/admin/Assign">
-                    <i class=" fa fa-users"></i>
-                    <span>Assign Dosen Silabus</span>
+                    <a class="{{ (url()->current() == url("/dosen/cetak")) ? 'active' : '' }}" href="/dosen/cetak">
+                        <i class="fa fa-print" aria-hidden="true"></i>
+                    <span>Cetak PDF Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <button class="btn btn-success"><i class="fa fa-download"></i> Report Pengisian Silabus</button>
-                </li>
-                <li class="sub-menu">
-                    <button class="btn btn-info"><i class="fa fa-external-link-square"></i> Export Deskripsi Mata Kuliah</button>
+                    <button class="btn btn-success"><i class="fa fa-download"></i> Download Pedoman Silabus</button>
                 </li>
             </div>
         </aside>
@@ -96,9 +95,9 @@
                 </p>
                 <div class="credits">
                 </div>
-                <a href="" class="go-top">
+                {{-- <a href="/" class="go-top">
                     <i class="fa fa-angle-up"></i>
-                </a>
+                </a> --}}
             </div>
         </footer>
     <!--footer end-->

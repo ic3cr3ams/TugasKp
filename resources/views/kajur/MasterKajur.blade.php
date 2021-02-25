@@ -46,7 +46,8 @@
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
         <!--logo start-->
-            <a href="/admin/Home" class="logo"><b><span><img src="{{asset('images/stts.png')}}" class="float-center" width="40" height="40"></span><span> Silabus ISTTS</span> </b></a>
+            {{-- <img src="{{asset('asset/admin/img/logo-istts.png')}}" alt="" srcset="" class="rounded float-left"> --}}
+            <a href="index.html" class="logo"><b><span><img src="{{asset(('images/stts.png'))}}" class="float-center" width="40" height="40"></span><span> Silabus ISTTS</span> </b></a>
             <!--logo end-->
 
             <ul class="nav pull-right top-menu">
@@ -60,31 +61,48 @@
         <!--sidebar start-->
         <aside>
             <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                <h5 class="centered">Welcome,Admin BAA</h5>
-                <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/Home")) ? 'active' : '' }}" href="/admin/Home">
-                    <i class="fa fa-home" aria-hidden="true"></i>
+                <h5 class="centered">Nama Dosen Login</h5>
+                <h6 class="centered">Kaprodi</h6>
+                {{-- <li class="mt">
+                    <a class="{{ (url()->current() == url("/admin/index")) ? 'active' : '' }}" href="index">
+                    <i class="fa fa-dashboard"></i>
                     <span>Home</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/MataKuliah")) ? 'active' : '' }}" href="/admin/MataKuliah">
-                    <i class="fa fa-file-text"></i>
-                    <span>Mata Kuliah</span>
+                    <a class="{{ (url()->current() == url("/kajur/Home")) ? 'active' : '' }}" href="/kajur/Home">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    <span>Mata Kuliah Jurusan</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/Assign")) ? 'active' : '' }}" href="/admin/Assign">
-                    <i class=" fa fa-users"></i>
+                    <a class="{{ (url()->current() == url("/kajur/matkulkajur")) ? 'active' : '' }}" href="/kajur/matkulkajur">
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                    <span>Mata Kuliah Yang Ditugaskan</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a class="{{ (url()->current() == url("/kajur/Assign")) ? 'active' : '' }}" href="/kajur/Assign">
+                    <i class="fa fa-users" aria-hidden="true"></i>
                     <span>Assign Dosen Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <button class="btn btn-success"><i class="fa fa-download"></i> Report Pengisian Silabus</button>
+                    <a class="{{ (url()->current() == url("/kajur/verifikasi")) ? 'active' : '' }}" href="/kajur/verifikasi">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    <span>Verifikasi Silabus Dosen</span>
+                    </a>
                 </li>
                 <li class="sub-menu">
-                    <button class="btn btn-info"><i class="fa fa-external-link-square"></i> Export Deskripsi Mata Kuliah</button>
+                    <a class="{{ (url()->current() == url("/kajur/cetak")) ? 'active' : '' }}" href="/kajur/cetak">
+                        <i class="fa fa-print" aria-hidden="true"></i>
+                    <span>Cetak PDF Silabus</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <button class="btn btn-success"><i class="fa fa-download"></i> Download Pedoman Silabus</button>
                 </li>
             </div>
         </aside>
@@ -96,7 +114,7 @@
                 </p>
                 <div class="credits">
                 </div>
-                <a href="" class="go-top">
+                <a href="advanced_form_components.html#" class="go-top">
                     <i class="fa fa-angle-up"></i>
                 </a>
             </div>
