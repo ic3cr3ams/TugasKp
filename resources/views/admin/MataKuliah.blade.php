@@ -9,30 +9,34 @@
                 <div>
                    
                     <form>
-                        <label style="color: black"><i class="fa fa-filter"></i> <b>Filter</b></label>
-                        <div class="form-group row">
-                            <label class="col-sm-1 col-form-label">Program Studi</label>
-                            <div class="col-sm-3">
-                                <select class="form-control form-control-sm">
-                                    <option>Small select</option>
-                                  </select>
+                        <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
+                        <div class="form-group row col-sm-5">
+                            <div class="col-auto">
+                                <label style="font-size: 10pt;">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                    Program Studi
+                                </label>
                             </div>
-                            <label class="col-sm-1 col-form-label">Kurikulum</label>
-                            <div class="col-sm-3">
-                                <select class="form-control form-control-sm">
-                                    <option>Small select</option>
-                                  </select>
-                            </div>
-                            <label class="col-sm-1 col-form-label">Mata Kuliah</label>
-                            <div class="col-sm-3">
-                                <select class="form-control form-control-sm">
-                                    <option>Small select</option>
-                                  </select>
+                            <div class="col-auto">
+                                <label style="font-size: 10pt;">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                    Kurikulum
+                                </label>
                             </div>
                           </div>
+                        <div>
+                            <select class="form-control col-sm-5" style="border-radius: 25px;">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </select>
+                        </div>
                     </form>
+                    <br>
                 </div>
-                <div class="content-panel">
+                <div class="content-panel" style="border-radius: 25px;">
                     <form>
                         <div class="form-row col-sm-9">
                             <div class="form-group col-md-2">

@@ -2,7 +2,7 @@
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Paket Tour</h3>
+        <h3><i class="fa fa-angle-right"></i> Verifikasi Silabus Dosen</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
@@ -35,7 +35,43 @@
                                     <button class="btn btn-primary btn-xs" style="color: white;"><i class="fa fa-file-text"></i> Lihat Silabus</button>  
                                 </td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-check-circle"></i> Setujui</button>
+                                    <!-- Button to Open the Modal -->
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">
+                                            <i class="fa fa-check-circle"></i> Setujui
+                                        </button>
+                                        
+                                        <!-- The Modal -->
+                                        <div class="modal" id="myModal">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                        
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Setujui Silabus</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                        
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <label>Pilih Silabus yang disetujui :</label> <br>
+                                                    <label style="font-size: 10pt;">
+                                                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                                        Silabus Bahasa Indonesia
+                                                    </label>
+                                                    <label style="font-size: 10pt;">
+                                                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                                        Silabus Bahasa Inggris
+                                                    </label>
+                                                </div>
+                                        
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                                                </div>
+                                        
+                                            </div>
+                                            </div>
+                                        </div>
                                     <button class="btn btn-danger btn-xs"><i class="fa fa-ban "></i> Tolak</button>
                                 </td>
                             </tr>

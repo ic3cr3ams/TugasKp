@@ -7,42 +7,49 @@
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                <form>
-                    <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
-                    <div class="form-group row">
-                        <div class="col-sm-5">
-                            <select class="form-control form-control-md">
-                                <option>Small select</option>
-                              </select>
-                        </div>
-                      </div>
-                </form>
-                <form>
-                    <label style="color: black"><i class="fa fa-filter"></i> <b>Filter</b></label>
-                    <div class="form-group row">
-                        <div class="col-sm-3">
-                        <label>
-                            <input type="checkbox" value="">
-                             Tampilkan Mata Kuliah yang telah memiliki Dosen
-                            </label>
-                        </div>
-                        <div class="col-sm-5">
-                            <label>
-                                <input type="checkbox" value="">
-                                 Tampilkan Mata Kuliah yang dimiliki oleh Dosen sekarang
-                                </label>
-                        </div>
-                      </div>
-                </form>
+                    <form>
+                        <div class="input-group mb-3 col-sm-4" style="">
+                            <input type="text" class="form-control" placeholder="Mata Kuliah" aria-label="Mata Kuliah" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-success" style="background-color:rgb(155, 238, 155)" type="button"><i class="fa fa-search"></i></button>
+                            </div>
+                          </div>
+                    </form>
+                
             </div>
-                <div class="content-panel">
+                <div class="content-panel"style="border-radius: 25px;">
+                    <form class="col-sm-10">
+                        <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
+                        <div class="form-group row">
+                            <div class="col-sm-9">
+                                <select class="form-control form-control-md">
+                                    <option>Small select</option>
+                                  </select>
+                            </div>
+                          </div>
+                          <label style="color: black;font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
+                          <div class="form-group row">
+                              <div class="col-sm-4">
+                              <label>
+                                  <input type="checkbox" value="">
+                                   Tampilkan Mata Kuliah yang telah memiliki Dosen
+                                  </label>
+                              </div>
+                              <div class="col-sm-4">
+                                  <label>
+                                      <input type="checkbox" value="">
+                                       Tampilkan Mata Kuliah yang dimiliki oleh Dosen sekarang
+                                      </label>
+                              </div>
+                            </div>
+                    </form>
                     <table class="table table-striped table-advance table-hover">
                         <thead>
                             <tr>
                                 <th></th>
                                 <th>Mata Kuliah</th>
                                 <th>Program Studi</th>
-                                <th>Deskripsi</th>
+                                <th>Kurikulum</th>
                                 <th>Dosen</th>
                             </tr>
                         </thead>
@@ -72,8 +79,8 @@
                 </div>
                 <!-- /content-panel -->
                 <br>
-                <div>
-                    <a href="/admin/tambahPaket"><button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button></a>
+                <div class="col-sm-5">
+                    <a href="/admin/tambahPaket"><button type="submit" class="btn btn-primary" style="border-radius: 25px;"><i class="fa fa-save"></i> Simpan</button></a>
                 </div>
             </div>
         </div>

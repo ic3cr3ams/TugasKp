@@ -5,20 +5,31 @@
         <h3><i class="fa fa-angle-right"></i> Mata Kuliah Kaprodi</h3>
         <!-- row -->
         <div class="row mt">
-            <div class="col-md-12">
-                <div class="content-panel">
+            <div class="col-md-12" >
+                <div class="content-panel"style="border-radius: 25px;">
+                    <form>
+                        <div class="form-row col-sm-9">
+                            <div class="form-group col-md-2">
+                              <input type="text" class="form-control" id="inputSeacrh" placeholder="Nama Mata Kuliah">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn mb-2" style="background-color: #afec85"><i class="fa fa-search"></i> Cari</button>
+                              </div>
+                        </div>
+                    </form>
                     <table class="table table-striped table-advance table-hover">
                         <thead>
                             <tr>
-                                <th>Nama Mata Kuliah</th>
+                                <th>Kode Mata Kuliah</th>
+                                <th>Mata Kuliah</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
-                                <th>Action<th>
+                                <th>Nama Dosen</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                         <tr>
+                            <tr>
                                 <td>
                                     <a>Mata Kuliah</a>
                                 </td>
@@ -26,6 +37,8 @@
                                 <td>
                                     <a>K13</a>
                                 </td>
+                                <td>Lorem Ipsum dolor</td>
+                                <td>Lorem Ipsum dolor</td>
                                 <td>
                                     <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-plus-circle"></i> Add Silabus</button>
                                     <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i> Delete</button>
