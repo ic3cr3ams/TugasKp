@@ -62,7 +62,7 @@
                 <li class="sub-menu">
                     <a class="{{ (url()->current() == url("/dosen/cetak")) ? 'active' : '' }}" href="/dosen/cetak">
                     <i class="fa fa-download"></i> 
-                    <span>Download Pedoman Silabus</span>
+                    <span>Unduh Pedoman Silabus</span>
                     </a>
                 </li>
             </div>

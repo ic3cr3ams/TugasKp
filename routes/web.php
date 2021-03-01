@@ -39,4 +39,11 @@ Route::prefix("/kajur")->group(function() {
     Route::get('matkulkajur', function () {return view('kajur.matkulkajur');});
 });
 
+Route::prefix("/dekan")->group(function() {
+    Route::get('Assign', function () {return view('dekan.AssignDekan');});
+    Route::get('cetak', function () {return view('dekan.cetak');});
+    Route::get('export', function () {return view('dekan.export');});
+    Route::get('matkulfakul', function () {return view('dekan.matkulfakultas');});
+});
+
 Route::get("sialbusind",function(){return view('dosen.addsilabusIndo');});

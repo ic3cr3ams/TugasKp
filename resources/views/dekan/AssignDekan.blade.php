@@ -1,13 +1,12 @@
-@extends('dosen/MasterDosen')
+@extends('dekan/MasterDekan')
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Mata Kuliah</h3>
+        <h3><i class="fa fa-angle-right"></i> Mata Kuliah Dekan</h3>
         <!-- row -->
         <div class="row mt">
-            <div class="col-md-12">
-                
-                <div class="content-panel" style="border-radius: 25px;">
+            <div class="col-md-12" >
+                <div class="content-panel"style="border-radius: 25px;">
                     <form>
                         <div class="form-row col-sm-9">
                             <div class="form-group col-md-4">
@@ -30,22 +29,21 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                         <tr>
-                             <td>lorem ipsum</td>
-                            <td>
-                                <a>Mata Kuliah</a>
-                            </td>
-                            <td>
-                                <a>S1 - SIB</a>
-                            </td>
-                            <td>lorem ipsum</td>
-                            <td>lorem ipsum</td>
-                            <td>
-                                <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-plus-circle"></i> Tambah Silabus</button>
-                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i> Hapus</button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <a>Mata Kuliah</a>
+                                </td>
+                                <td>Lorem Ipsum dolor</td>
+                                <td>
+                                    <a>K13</a>
+                                </td>
+                                <td>Lorem Ipsum dolor</td>
+                                <td>Lorem Ipsum dolor</td>
+                                <td>
+                                    <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-plus-circle"></i> Tambah Silabus</button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i> Hapus</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
