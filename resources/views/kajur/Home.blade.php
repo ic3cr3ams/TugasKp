@@ -40,7 +40,18 @@
                                 <td>Lorem Ipsum dolor</td>
                                 <td>Lorem Ipsum dolor</td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-plus-circle"></i> Tambah Silabus</button>
+                                    <button class="btn btn-success btn-xs" style="color: white;"data-toggle="collapse" onclick="silab()"><i class="fa fa-plus-circle" ></i> Tambah Silabus</button>
+                                    <script>
+                                        function silab(){
+                                            if(document.getElementById('bahasa').style.display==='block'){
+                                                document.getElementById('bahasa').style.display='none';
+                                            }else document.getElementById('bahasa').style.display='block';
+                                        }
+                                    </script>
+                                    <div id="bahasa" class="collapse" style="display: none">
+                                        <button class="dropdown-item" type="button">Bahasa Indonesia</button>
+                                        <button class="dropdown-item" type="button">Bahasa Inggris</button>
+                                    </div>
                                     <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i> Hapus</button>
                                 </td>
                             </tr>

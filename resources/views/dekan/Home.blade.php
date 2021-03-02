@@ -42,7 +42,18 @@
                             <td>lorem ipsum</td>
                             <td>lorem ipsum</td>
                             <td>
-                                <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-plus-circle"></i> Tambah Silabus</button>
+                                <button class="btn btn-success btn-xs" style="color: white;"data-toggle="collapse" onclick="silab()"><i class="fa fa-plus-circle" ></i> Tambah Silabus</button>
+                                <script>
+                                    function silab(){
+                                        if(document.getElementById('bahasa').style.display==='block'){
+                                            document.getElementById('bahasa').style.display='none';
+                                        }else document.getElementById('bahasa').style.display='block';
+                                    }
+                                </script>
+                                <div id="bahasa" class="collapse" style="display: none">
+                                    <button class="dropdown-item" type="button">Bahasa Indonesia</button>
+                                    <button class="dropdown-item" type="button">Bahasa Inggris</button>
+                                </div>
                                 <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i> Hapus</button>
                             </td>
                         </tr>
@@ -55,19 +66,12 @@
         <!-- /row -->
     </section>
 </section>
-    <!-- /MAIN CONTENT -->
-    <!--main content end-->
-    <!--footer start-->
-  <!-- js placed at the end of the document so the pages load faster -->
   <script src="{{asset('asset/admin/lib/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('asset/admin/lib/bootstrap/js/bootstrap.min.js')}}"></script>
   <script class="include" type="text/javascript" src="{{asset('asset/admin/lib/jquery.dcjqaccordion.2.7.js')}}"></script>
   <script src="{{asset('asset/admin/lib/jquery.scrollTo.min.js')}}"></script>
   <script src="{{asset('asset/admin/lib/jquery.nicescroll.js')}}" type="text/javascript"></script>
-  <!--common script for all pages-->
   <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
-  <!--script for this page-->
-
 
 
   @endsection

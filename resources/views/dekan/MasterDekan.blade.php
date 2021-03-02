@@ -11,28 +11,19 @@
 
     <!-- Favicons -->
     <link href="{{asset('asset/admin/img/logo-istts.png')}}" rel="icon">
-    {{-- <link href="{{asset('asset/admin/img/logo-istts.png')}}" rel="apple-touch-icon"> --}}
 
     <!-- Bootstrap core CSS -->
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="{{ asset('asset/admin/lib/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
     <!--external css-->
     <link href="{{ asset('asset/admin/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-fileupload/bootstrap-fileupload.css') }}" />
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-datepicker/css/datepicker.css') }}" /> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-daterangepicker/daterangepicker.css') }}" /> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-timepicker/compiled/timepicker.css') }}" /> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-datetimepicker/css/datetimepicker.css') }}" /> --}}
-    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-datepicker/css/datepicker.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-daterangepicker/daterangepicker.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-timepicker/compiled/timepicker.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-datetimepicker/css/datetimepicker.css') }}" />
     <link href="{{ asset('asset/admin/css/style.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('asset/admin/css/style-responsive.css') }}" rel="stylesheet"> --}}
-
-    <!-- =======================================================
-        Template Name: Dashio
-        Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-        Author: TemplateMag.com
-        License: https://templatemag.com/license/
-    ======================================================= -->
+    <link href="{{ asset('asset/admin/css/style-responsive.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -50,14 +41,8 @@
                 <a class="btn btn-danger btn-sm mt-3" href="/">Logout</a>
             </ul>
         </header>
-        <!--header end-->
-        <!-- **********************************************************************************************************************************************************
-            MAIN SIDEBAR MENU
-            *********************************************************************************************************************************************************** -->
-        <!--sidebar start-->
         <aside>
             <div id="sidebar" class="nav-collapse "style="background-color:#224350;">
-                <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
                 <h5 class="centered">Nama Dekan Login</h5>
                 <h6 class="centered">Dekan</h6>
@@ -108,18 +93,15 @@
         </footer>
     <!--footer end-->
     </section>
-    {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> --}}
-    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="{{ asset('asset/admin/lib/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('asset/admin/lib/bootstrap/js/bootstrap.js') }}"></script>
-    {{-- <script class="include" type="text/javascript" src="{{ asset('asset/admin/lib/jquery.dcjqaccordion.2.7.js') }}"></script>
+     <script class="include" type="text/javascript" src="{{ asset('asset/admin/lib/jquery.dcjqaccordion.2.7.js') }}"></script>
     <script src="{{ asset('asset/admin/lib/jquery.scrollTo.min.js') }}"></script>
     <script src="{{ asset('asset/admin/lib/jquery.nicescroll.js') }}" type="text/javascript"></script>
-    <!--common script for all pages-->
     <script src="{{ asset('asset/admin/lib/common-scripts.js') }}"></script>
-    <!--script for this page-->
     <script src="{{ asset('asset/admin/lib/jquery-ui-1.9.2.custom.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/admin/lib/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/admin/lib/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
@@ -128,8 +110,7 @@
     <script type="text/javascript" src="{{ asset('asset/admin/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/admin/lib/bootstrap-daterangepicker/moment.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/admin/lib/bootstrap-timepicker/js/bootstrap-timepicker.js') }}"></script>
-    <script src="{{ asset('asset/admin/lib/advanced-form-components.js') }}"></script>
-    @stack('js') --}}
+    <script src="{{ asset('asset/admin/lib/advanced-form-components.js') }}"></script> --}}
 </body>
 
 </html>
