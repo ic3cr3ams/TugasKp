@@ -54,14 +54,14 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/dosen/cetak")) ? 'active' : '' }}" href="/dosen/cetak">
+                    <a class="{{ (url()->current() == url("/dosen/cetak")) ? 'active' : '' }}" href="/dosen/Cetak">
                         <i class="fa fa-print" aria-hidden="true"></i>
                     <span>Cetak PDF Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/dosen/cetak")) ? 'active' : '' }}" href="/dosen/cetak">
-                    <i class="fa fa-download"></i> 
+                    <a  href="/dosen/Unduh">
+                    <i class="fa fa-download"></i>
                     <span>Unduh Pedoman Silabus</span>
                     </a>
                 </li>

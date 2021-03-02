@@ -63,14 +63,8 @@
             <div id="sidebar" class="nav-collapse "style="background-color:#224350;">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                <h5 class="centered">Nama Dekan Login</h5>
+                <h5 class="centered">Nama Kajur Login</h5>
                 <h6 class="centered">Kaprodi</h6>
-                {{-- <li class="mt">
-                    <a class="{{ (url()->current() == url("/admin/index")) ? 'active' : '' }}" href="index">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Home</span>
-                    </a>
-                </li> --}}
                 <li class="sub-menu">
                     <a class="{{ (url()->current() == url("/kajur/Home")) ? 'active' : '' }}" href="/kajur/Home">
                     <i class="fa fa-list-alt" aria-hidden="true"></i>
@@ -102,8 +96,8 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/cetak")) ? 'active' : '' }}" href="/kajur/cetak">
-                    <i class="fa fa-download"></i> 
+                    <a href="/kajur/Unduh">
+                    <i class="fa fa-download"></i>
                     <span> Unduh Pedoman Silabus</span>
                     </a>
                 </li>

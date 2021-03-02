@@ -50,14 +50,14 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/Assign")) ? 'active' : '' }}" href="/admin/Assign">
-                    <i class="fa fa-download"></i> 
+                    <a href="/admin/Pengisian">
+                    <i class="fa fa-download"></i>
                     <span> Pengisian Silabus </span>
                 </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/Assign")) ? 'active' : '' }}" href="/admin/Assign">
-                    <i class="fa fa-external-link-square"></i> 
+                    <a href="/admin/Deskripsi">
+                    <i class="fa fa-external-link-square"></i>
                     <span> Deskripsi Mata Kuliah</span>
                     </a>
                 </li>
@@ -67,7 +67,7 @@
         <footer class="site-footer">
             <div class="text-center">
                 <p>
-                    
+
                 </p>
                 <div class="credits">
                 </div>

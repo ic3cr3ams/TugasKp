@@ -16,5 +16,11 @@ class LoginController extends Controller
         else if ($input->username == "kajur" && $input->pass == "kajur") {
             return view("kajur.Home");
         }
+        else if ($input->username == "dekan" && $input->pass == "dekan") {
+            return view("dekan.Home");
+        }
+        else if ($input->username == "wakil" && $input->pass == "wakil") {
+            return view("wakil.Home");
+        }
     }
 }

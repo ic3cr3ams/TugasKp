@@ -37,10 +37,6 @@
 
 <body>
     <section id="container">
-        <!-- **********************************************************************************************************************************************************
-            TOP BAR CONTENT & NOTIFICATIONS
-            *********************************************************************************************************************************************************** -->
-        <!--header start-->
         <header class="header black-bg" style="background-color:#192D35;">
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
@@ -63,40 +59,34 @@
             <div id="sidebar" class="nav-collapse "style="background-color:#224350;">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                <h5 class="centered">Nama Dosen Login</h5>
+                <h5 class="centered">Nama Dekan Login</h5>
                 <h6 class="centered">Dekan</h6>
-                {{-- <li class="mt">
-                    <a class="{{ (url()->current() == url("/admin/index")) ? 'active' : '' }}" href="index">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Home</span>
-                    </a>
-                </li> --}}
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/Home")) ? 'active' : '' }}" href="/kajur/Home">
+                    <a class="{{ (url()->current() == url("/dekan/Home")) ? 'active' : '' }}" href="/dekan/Home">
                     <i class="fa fa-list-alt" aria-hidden="true"></i>
                     <span>Mata Kuliah Fakultas</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/matkulkajur")) ? 'active' : '' }}" href="/kajur/matkulkajur">
+                    <a class="{{ (url()->current() == url("/dekan/AssignDekan")) ? 'active' : '' }}" href="/dekan/AssignDekan">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                     <span>Mata Kuliah Yang Ditugaskan</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/cetak")) ? 'active' : '' }}" href="/kajur/cetak">
+                    <a class="{{ (url()->current() == url("/dekan/cetak")) ? 'active' : '' }}" href="/dekan/cetak">
                         <i class="fa fa-print" aria-hidden="true"></i>
                     <span>Cetak PDF Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/cetak")) ? 'active' : '' }}" href="/kajur/cetak">
-                    <i class="fa fa-download"></i> 
+                    <a href="/dekan/Unduh">
+                    <i class="fa fa-download"></i>
                     <span> Unduh Pedoman Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/verifikasi")) ? 'active' : '' }}" href="/kajur/verifikasi">
+                    <a href="/dekan/Export">
                     <i class="fa fa-external-link" aria-hidden="true"></i>
                     <span>Export Data Silabus</span>
                     </a>
