@@ -36,10 +36,9 @@
                                 </td>
                                 <td>
                                     <!-- Button to Open the Modal -->
-                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">
-                                            <i class="fa fa-check-circle"></i> Setujui
+                                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal">
+                                            <i class="fa fa-check-circle"></i> Verifikasi
                                         </button>
-                                        
                                         <!-- The Modal -->
                                         <div class="modal" id="myModal">
                                             <div class="modal-dialog">
@@ -47,32 +46,46 @@
                                         
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
-                                                <h4 class="modal-title">Setujui Silabus</h4>
+                                                <h4 class="modal-title">Verifikasi Silabus</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
                                         
                                                 <!-- Modal body -->
                                                 <div class="modal-body">
-                                                    <label>Pilih Silabus yang disetujui :</label> <br>
-                                                    <label style="font-size: 10pt;">
-                                                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                        Silabus Bahasa Indonesia
-                                                    </label>
-                                                    <label style="font-size: 10pt;">
-                                                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                        Silabus Bahasa Inggris
-                                                    </label>
+                                                    <table class="table table-striped table-advance table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Silabus</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Bahasa Indonesia </td>
+                                                                <td>
+                                                                    <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-check-circle"></i> Setujui</button>  
+                                                                    <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-ban "></i> Tolak</button>  
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Bahasa Inggris </td>
+                                                                <td>
+                                                                    <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-check-circle"></i> Setujui</button>  
+                                                                    <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-ban "></i> Tolak</button>  
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                         
                                                 <!-- Modal footer -->
                                                 <div class="modal-footer">
-                                                <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                                                <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
                                                 </div>
                                         
                                             </div>
                                             </div>
                                         </div>
-                                    <button class="btn btn-danger btn-xs"><i class="fa fa-ban "></i> Tolak</button>
                                 </td>
                             </tr>
                         </tbody>
