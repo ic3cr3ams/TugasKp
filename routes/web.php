@@ -55,4 +55,13 @@ Route::prefix("/dekan")->group(function() {
     Route::get('Export', [DekanController::class,'Export']);
 });
 
+Route::prefix("/wakil")->group(function() {
+    Route::get('AssignWakil', function () {return view('wakilrektor.assign');});
+    Route::get('cetak', function () {return view('wakilrektor.cetak');});
+    Route::get('export', function () {return view('wakilrektor.export');});
+    Route::get('Home', function () {return view('wakilrektor.Home');});
+    Route::get('Unduh', [DekanController::class,'Unduh']);
+    Route::get('Export', [DekanController::class,'Export']);
+});
+
 Route::get("sialbusind",function(){return view('dosen.addsilabusIndo');});

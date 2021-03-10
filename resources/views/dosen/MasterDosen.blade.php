@@ -50,7 +50,7 @@
                 <li class="sub-menu">
                     <a class="{{ (url()->current() == url("/dosen/Home")) ? 'active' : '' }}" href="/dosen/Home">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
-                    <span>Mata Kuliah Yang Diajar</span>
+                    <span>Mata Kuliah Yang Ditugaskan</span>
                     </a>
                 </li>
                 <li class="sub-menu">

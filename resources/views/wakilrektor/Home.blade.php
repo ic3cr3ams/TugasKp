@@ -1,8 +1,8 @@
-@extends('admin/MasterAdmin')
+@extends('wakilrektor/MasterWakil')
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-list-alt"></i> Mata Kuliah</h3>
+        <h3><i class="fa fa-list-alt"></i> Mata Kuliah iSTTS</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
@@ -59,6 +59,8 @@
                                 <th>Mata Kuliah</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
+                                <th>Nama Dosen</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,6 +74,12 @@
                             <td>
                                 Lorem Ipsum Color
                             </td>
+                            <td>
+                                Lorem Ipsum Color
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-xs" style="color: white;"data-toggle="collapse"><i class="fa fa-plus-circle" ></i> Lihat Silabus</button>
+                            </td>
                         </tr>
                         <tr>
                             <tr>
@@ -82,6 +90,12 @@
                                 <td>K13</td>
                                 <td>
                                     Lorem Ipsum Color
+                                </td>
+                                <td>
+                                    Lorem Ipsum Color
+                                </td>
+                                <td>
+                                    <button class="btn btn-success btn-xs" style="color: white;"data-toggle="collapse"><i class="fa fa-plus-circle" ></i> Lihat Silabus</button>
                                 </td>
                             </tr>
                         </tr>

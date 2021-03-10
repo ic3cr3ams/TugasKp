@@ -2,7 +2,7 @@
 @section('body')
 <section id="main-content">
     <section class="wrapper site-min-height">
-      <h3><i class="fa fa-angle-right"></i>Cetak PDF Silabus</h3>
+      <h3><i class="fa fa fa-print"></i>Cetak PDF Silabus</h3>
       <div class="row mt">
         <div class="col-lg-12">
           <!-- The file upload form used as target for the file upload widget -->
@@ -14,6 +14,14 @@
             <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
             <div class="row fileupload-buttonbar">
               <div class="col-lg-8">
+                <select class="form-control" style="border-radius: 25px;">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+                <br>
                 <button type="submit" class="btn btn-info ">
                   <i class="fa fa-print"></i>
                   <span>Cetak PDF</span>

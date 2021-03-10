@@ -2,11 +2,45 @@
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Mata Kuliah Fakultas</h3>
+        <h3><i class="fa fa-list-alt"></i> Mata Kuliah Fakultas</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
-
+                <div>
+                   
+                    <form>
+                        <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
+                        <div class="form-group row col-sm-5">
+                            <div class="col-auto">
+                                <label style="font-size: 10pt;">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                    Program Studi
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label style="font-size: 10pt;">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                    Kurikulum
+                                </label>
+                            </div>
+                          </div>
+                        <div>
+                                <div class="col-sm-5">
+                                    <select class="form-control" style="border-radius: 25px;">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                      </select>
+                                      <br>
+                                <button type="submit" class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;"><i class="fa fa-eraser"></i> Hapus</button>
+                              </div>
+                            
+                        </div>
+                    </form>
+                    <br>
+                </div>
                 <div class="content-panel" style="border-radius: 25px;">
                     <form>
                         <div class="form-row col-sm-9">
@@ -32,30 +66,39 @@
                         <tbody>
 
                          <tr>
-                             <td>lorem ipsum</td>
                             <td>
-                                <a>Mata Kuliah</a>
+                                Bahasa Indonesia
+                            </td>
+                            <td class="hidden-phone">Lorem Ipsum dolor</td>
+                            <td>K13</td>
+                            <td>
+                                Lorem Ipsum Color
                             </td>
                             <td>
-                                <a>S1 - SIB</a>
+                                Lorem Ipsum Color
                             </td>
-                            <td>lorem ipsum</td>
-                            <td>lorem ipsum</td>
                             <td>
-                                <button class="btn btn-success btn-xs" style="color: white;"data-toggle="collapse" onclick="silab()"><i class="fa fa-plus-circle" ></i> Tambah Silabus</button>
-                                <script>
-                                    function silab(){
-                                        if(document.getElementById('bahasa').style.display==='block'){
-                                            document.getElementById('bahasa').style.display='none';
-                                        }else document.getElementById('bahasa').style.display='block';
-                                    }
-                                </script>
-                                <div id="bahasa" class="collapse" style="display: none">
-                                    <button class="dropdown-item" type="button">Bahasa Indonesia</button>
-                                    <button class="dropdown-item" type="button">Bahasa Inggris</button>
-                                </div>
-                                <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i> Hapus</button>
+                                <button class="btn btn-success btn-xs" style="color: white;"data-toggle="collapse"><i class="fa fa-plus-circle" ></i> Lihat Silabus</button>
                             </td>
+                        </tr>
+                        <tr>
+                            <tr>
+                                <td>
+                                    Bahasa Indonesia
+                                </td>
+                                <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                <td>K13</td>
+                                <td>
+                                    Lorem Ipsum Color
+                                </td>
+                                <td>
+                                    Lorem Ipsum Color
+                                </td>
+                                <td>
+                                    <button class="btn btn-success btn-xs" style="color: white;"data-toggle="collapse"><i class="fa fa-plus-circle" ></i> Lihat Silabus</button>
+                                    
+                                </td>
+                            </tr>
                         </tr>
                         </tbody>
                     </table>

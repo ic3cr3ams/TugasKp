@@ -14,6 +14,14 @@
             <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
             <div class="row fileupload-buttonbar">
               <div class="col-lg-8">
+                <select class="form-control" style="border-radius: 25px;">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+                <br>
                 <button type="submit" class="btn btn-info ">
                   <i class="fa fa-print"></i>
                   <span>Cetak PDF</span>

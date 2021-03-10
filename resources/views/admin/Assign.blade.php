@@ -2,12 +2,12 @@
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Assign Dosen Pengisi Silabus</h3>
+        <h3><i class="fa fa-users"></i> Assign Dosen Pengisi Silabus</h3>
         <div class="row mt">
             <div class="col-md-12">
                 <div>
                     <form>
-                        <div class="input-group mb-3 col-sm-4" style="">
+                        <div class="input-group mb-3 col-sm-4">
                             <input type="text" class="form-control" placeholder="Mata Kuliah" aria-label="Mata Kuliah" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                               <button class="btn btn-outline-success" style="background-color:rgb(155, 238, 155)" type="button"><i class="fa fa-search"></i></button>
