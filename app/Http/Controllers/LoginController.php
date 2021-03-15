@@ -21,7 +21,7 @@ class LoginController extends Controller
             return view("dekan.Home",compact('silabus'));
         }
         else if ($input->username == "wakil" && $input->pass == "wakil") {
-            return view("wakil.Home",compact('silabus'));
+            return view("wakilrektor.Home",compact('silabus'));
         }
     }
 }
