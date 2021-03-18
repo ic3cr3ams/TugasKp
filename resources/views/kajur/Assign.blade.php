@@ -48,6 +48,7 @@
                             <tr>
                                 <th></th>
                                 <th>Mata Kuliah</th>
+                                <th>Semester</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
                                 <th>Dosen</th>
@@ -60,6 +61,7 @@
                             </td>
                             <td>Nama Matkul
                             </td>
+                            <td>Lorem Ipsum</td>
                             <td class="hidden-phone">Lorem Ipsum dolor</td>
                             <td>Lorem Ipsum</td>
                             <td style="color: red"><b>Belum Memiliki Dosen</b></td>
@@ -70,6 +72,7 @@
                             </td>
                             <td>Nama Matkul
                             </td>
+                            <td>Lorem Ipsum</td>
                             <td class="hidden-phone">Lorem Ipsum dolor</td>
                             <td>Lorem Ipsum</td>
                             <td><b> Hartarto Junaedi</b></td>

@@ -55,7 +55,7 @@
                 <li class="sub-menu">
                     <a class="{{ (url()->current() == url("/dekan/AssignDekan")) ? 'active' : '' }}" href="/dekan/AssignDekan">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
-                    <span>Mata Kuliah Yang Ditugaskan</span>
+                    <span style="font-size: 8pt;">Mata Kuliah Yang Ditugaskan</span>
                     </a>
                 </li>
                 <li class="sub-menu">

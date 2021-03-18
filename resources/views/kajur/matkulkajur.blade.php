@@ -57,6 +57,7 @@
                             <tr>
                                 <th>Kode Mata Kuliah</th>
                                 <th>Mata Kuliah</th>
+                                <th>Semester</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
                                 <th>Nama Dosen</th>
@@ -70,6 +71,9 @@
                                 Bahasa Indonesia
                             </td>
                             <td class="hidden-phone">Lorem Ipsum dolor</td>
+                            <td>
+                                Lorem Ipsum Color
+                            </td>
                             <td>K13</td>
                             <td>
                                 Lorem Ipsum Color
@@ -135,6 +139,9 @@
                             <tr>
                                 <td>
                                     Bahasa Indonesia
+                                </td>
+                                <td>
+                                    Lorem Ipsum Color
                                 </td>
                                 <td class="hidden-phone">Lorem Ipsum dolor</td>
                                 <td>K13</td>

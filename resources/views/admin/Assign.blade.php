@@ -8,7 +8,7 @@
                 <div>
                     <form>
                         <div class="input-group mb-3 col-sm-4">
-                            <input type="text" class="form-control" placeholder="Mata Kuliah" aria-label="Mata Kuliah" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control" placeholder="Mata Kuliah" aria-label="Mata Kuliah" aria-describedby="basic-addon2" >
                             <div class="input-group-append">
                               <button class="btn btn-outline-success" style="background-color:rgb(155, 238, 155)" type="button"><i class="fa fa-search"></i></button>
                             </div>
@@ -21,7 +21,7 @@
                         <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
                         <div class="form-group row">
                             <div class="col-sm-9">
-                                <select class="form-control form-control-md">
+                                <select class="form-control form-control-md" style="border-radius: 25px;">
                                     <option>Small select</option>
                                   </select>
                             </div>
@@ -49,6 +49,7 @@
                                 <th>Mata Kuliah</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
+                                <th>Semester</th>
                                 <th>Dosen</th>
                             </tr>
                         </thead>
@@ -61,6 +62,7 @@
                             </td>
                             <td class="hidden-phone">Lorem Ipsum dolor</td>
                             <td>Lorem Ipsum</td>
+                            <td>Lorem Ipsum</td>
                             <td style="color: red"><b>Belum Memiliki Dosen</b></td>
                         </tr>
                         <tr>
@@ -70,6 +72,7 @@
                             <td>Nama Matkul
                             </td>
                             <td class="hidden-phone">Lorem Ipsum dolor</td>
+                            <td>Lorem Ipsum</td>
                             <td>Lorem Ipsum</td>
                             <td><b> Hartarto Junaedi</b></td>
                         </tr>

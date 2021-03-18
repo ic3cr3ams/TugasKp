@@ -10,7 +10,7 @@
                    
                     <form>
                         <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
-                        <div class="form-group row col-sm-5">
+                        {{-- <div class="form-group row col-sm-5">
                             <div class="col-auto">
                                 <label style="font-size: 10pt;">
                                     <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
@@ -23,7 +23,16 @@
                                     Kurikulum
                                 </label>
                             </div>
+                          </div> --}}
+                          <div>
+                            <div class="col-sm-3">
+                                <select class="form-control" style="border-radius: 25px;">
+                                    <option>Program Studi</option>
+                                    <option>Kurikulum</option>
+                                  </select>
                           </div>
+                        <br>
+                    </div>
                         <div>
                                 <div class="col-sm-5">
                                     <select class="form-control" style="border-radius: 25px;">
@@ -57,6 +66,7 @@
                             <tr>
                                 <th>Kode Mata Kuliah</th>
                                 <th>Mata Kuliah</th>
+                                <th>Semester</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
                             </tr>
@@ -66,6 +76,9 @@
                          <tr>
                             <td>
                                 Bahasa Indonesia
+                            </td>
+                            <td>
+                                Lorem Ipsum Color
                             </td>
                             <td class="hidden-phone">Lorem Ipsum dolor</td>
                             <td>K13</td>
@@ -77,6 +90,9 @@
                             <tr>
                                 <td>
                                     Bahasa Indonesia
+                                </td>
+                                <td>
+                                    Lorem Ipsum Color
                                 </td>
                                 <td class="hidden-phone">Lorem Ipsum dolor</td>
                                 <td>K13</td>
