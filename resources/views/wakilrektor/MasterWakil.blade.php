@@ -63,40 +63,34 @@
             <div id="sidebar" class="nav-collapse "style="background-color:#224350;">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                <h5 class="centered">Nama Dosen Login</h5>
+                <h5 class="centered">Nama Wakil Rektor Login</h5>
                 <h6 class="centered">Wakil Rektor I</h6>
-                {{-- <li class="mt">
-                    <a class="{{ (url()->current() == url("/admin/index")) ? 'active' : '' }}" href="index">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Home</span>
-                    </a>
-                </li> --}}
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/Home")) ? 'active' : '' }}" href="/kajur/Home">
+                    <a class="{{ (url()->current() == url("/wakil/Home")) ? 'active' : '' }}" href="/wakil/Home">
                     <i class="fa fa-list-alt" aria-hidden="true"></i>
                     <span>Mata Kuliah ISTTS</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/matkulkajur")) ? 'active' : '' }}" href="/kajur/matkulkajur">
+                    <a class="{{ (url()->current() == url("/wakil/matkulkajur")) ? 'active' : '' }}" href="/wakil/AssignWakil">
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                     <span style="font-size: 8pt;">Mata Kuliah Yang Ditugaskan</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/cetak")) ? 'active' : '' }}" href="/kajur/cetak">
+                    <a class="{{ (url()->current() == url("/wakil/cetak")) ? 'active' : '' }}" href="/wakil/cetak">
                         <i class="fa fa-print" aria-hidden="true"></i>
                     <span>Cetak PDF Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/cetak")) ? 'active' : '' }}" href="/kajur/cetak">
-                    <i class="fa fa-download"></i> 
+                    <a class="{{ (url()->current() == url("/wakil/cetak")) ? 'active' : '' }}" href="/wakil/cetak">
+                    <i class="fa fa-download"></i>
                     <span> Unduh Pedoman Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/verifikasi")) ? 'active' : '' }}" href="/kajur/verifikasi">
+                    <a class="{{ (url()->current() == url("/wakil/verifikasi")) ? 'active' : '' }}" href="/wakil/verifikasi">
                     <i class="fa fa-external-link" aria-hidden="true"></i>
                     <span>Export Data Silabus</span>
                     </a>
