@@ -1,44 +1,59 @@
-@extends('dosen/MasterDosen')
+@extends('wakilrektor/MasterWakil')
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-user-o"></i> Mata Kuliah yang Ditugaskan</h3>
+        <h3><i class="fa fa-list-alt"></i> Mata Kuliah iSTTS</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                    <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
+                    <form method="POST" action="filterwarek">
+                        @csrf
+                        <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
                         <div class="form-group row col-sm-11">
                             <div class="col-sm-5">
                                 <label style="font-size: 10pt;">
                                     Program Studi
                                 </label>
-                                <select class="form-control" style="border-radius: 25px;">
+                                <select class="form-control" style="border-radius: 25px;" name="jrsn">
                                     <option value="all">--All--</option>
-                                    @foreach ($studi as $kurikulum)
-                                        <option value={{$kurikulum->kurikulum_kode}}>{{$kurikulum->kurikulum_kode }}</option>
+                                    @foreach ($jurusan as $j)
+                                        @if (Session::get("jurusan") == $j->jur_kode)
+                                            <option value={{$j->jur_kode}} selected>{{$j->jur_nama }}</option>
+                                        @else
+                                            <option value={{$j->jur_kode}} >{{$j->jur_nama }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 <br>
                                 <label style="font-size: 10pt;">
                                     Kurikulum
                                 </label>
-                                <select class="form-control" style="border-radius: 25px;">
+                                <select class="form-control" style="border-radius: 25px;" name="krklm">
                                     <option value="all">--All--</option>
-                                    @foreach ($jurusan as $j)
-                                        <option value={{$j->jur_nama}}>{{$j->jur_nama }}</option>
+                                    @foreach ($studi as $kurikulum)
+                                        @if (Session::get("kurikulum") == $kurikulum->kurikulum_kode)
+                                        <option value={{$kurikulum->kurikulum_kode}} selected>{{$kurikulum->kurikulum_kode }}</option>
+                                        @else
+                                        <option value={{$kurikulum->kurikulum_kode}}>{{$kurikulum->kurikulum_kode }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 <br>
-                            <button  class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;" onclick="alt()"><i class="fa fa-eraser"></i> Search</button>
+                            <button  class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;" ><i class="fa fa-eraser"></i> Search</button>
                             </div>
                         </div>
-                    <form>
-
                     </form>
                     <br>
                 </div>
                 <div class="content-panel" style="border-radius: 25px;">
+                    <form>
+                        <div class="form-row col-sm-9">
+                            <div class="form-group col-md-4">
+                              <input type="text" class="form-control" id="inputSeacrh" placeholder="Nama Mata Kuliah">
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-striped table-advance table-hover" id="myTable">
                         <thead>
                             <tr>
@@ -51,7 +66,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($kelass as $kelas)
+                            @foreach ($kelass as $kelas)
                             <tr>
                                 <td>{{ $kelas->mk_kodebaa }}</td>
                                 <td>{{ $kelas->matkul_nama }}</td>
@@ -74,7 +89,6 @@
                                             <h5>{{ $kelas->kelas_id }}</h5>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
-
                                             <!-- Modal body -->
                                             <div class="modal-body">
                                                 <table class="table table-striped table-advance table-hover">
@@ -107,6 +121,7 @@
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-info" data-dismiss="modal">Simpan</button>
                                             </div>
+
                                         </div>
                                         </div>
                                     </div>
@@ -130,7 +145,4 @@
   <!--common script for all pages-->
   <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
   <!--script for this page-->
-
-
-
   @endsection

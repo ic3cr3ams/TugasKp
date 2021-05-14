@@ -3,25 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
     public function login(Request $input){
-        $silabus =['Bahasa Indonesia','Bahasa Inggris'];
+        Auth::attempt(
+            $input->only('username','password')
+        );
+        // dd(Auth::user()->isDekan(""));
         if ($input->username == "adminbaak" && $input->pass == "useradmin123") {
             return view("admin.Home");
         }
-        else if ($input->username == "dosen" && $input->pass == "dosen") {
-            return view("dosen.Home",compact('silabus'));
+        if(Auth::user() !== null){
+            if (Auth::user()->isWarek("1")) {
+                return redirect("wakil/home");
+            }
+            else if (Auth::user()->isDekan("")) {
+                return redirect("dekan/home");
+            }
+            else if (Auth::user()->isKajur()) {
+                return redirect("kajur/home");
+            }
+            else if (Auth::user()->isDosen()) {
+                return redirect('dosen/home');
+            }
+            else return redirect('/')->with(['pesan'=>'Gagal Login']);
+        }else{
+            return redirect('/')->with(['pesan'=>'Gagal Login']);
         }
-        else if ($input->username == "kajur" && $input->pass == "kajur") {
-            return view("kajur.Home",compact('silabus'));
-        }
-        else if ($input->username == "dekan" && $input->pass == "dekan") {
-            return view("dekan.Home",compact('silabus'));
-        }
-        else if ($input->username == "wakil" && $input->pass == "wakil") {
-            return view("wakilrektor.Home",compact('silabus'));
-        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect('/');
     }
 }

@@ -7,7 +7,6 @@
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                   
                     <form>
                         <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
                         <div class="form-group row col-sm-5">
@@ -36,7 +35,7 @@
                                       <br>
                                 <button type="submit" class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;"><i class="fa fa-eraser"></i> Hapus</button>
                               </div>
-                            
+
                         </div>
                     </form>
                     <br>
@@ -52,7 +51,7 @@
                               </div>
                         </div>
                     </form>
-                    <table class="table table-striped table-advance table-hover">
+                    <table class="table table-striped table-advance table-hover" id="myTable">
                         <thead>
                             <tr>
                                 <th>Kode Mata Kuliah</th>
@@ -60,113 +59,33 @@
                                 <th>Semester</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
-                                <th>Nama Dosen</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                         <tr>
-                            <td>
-                                Bahasa Indonesia
-                            </td>
-                            <td>
-                                Lorem Ipsum Color
-                            </td>
-                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                            <td>K13</td>
-                            <td>
-                                Lorem Ipsum Color
-                            </td>
-                            <td>
-                                Lorem Ipsum Color
-                            </td>
-                            <td>
-                                    <!-- Button to Open the Modal -->
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">
-                                        <i class="fa fa-plus-circle"></i> Tambah
-                                    </button>
-                                    <!-- The Modal -->
-                                    <div class="modal" id="myModal">
-                                        <div class="modal-dialog">
-                                        <div class="modal-content">
-                                    
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                            <h4 class="modal-title">Tambah Silabus</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                    
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                                <table class="table table-striped table-advance table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Silabus</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Bahasa Indonesia </td>
-                                                            <td>
-                                                                <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-check-circle"></i> Tambah Silabus</button>  
-                                                                <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-ban "></i> Tolak</button>  
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Bahasa Inggris </td>
-                                                            <td>
-                                                                <button class="btn btn-warning btn-xs" style="color: white;"><i class="fa fa-pencil"></i> Edit Silabus</button>  
-                                                                <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-ban "></i> Tolak</button>  
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                    
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-info" data-dismiss="modal">Simpan</button>
-                                            </div>
-                                    
-                                        </div>
-                                        </div>
-                                    </div>
-                            </td>
-                        </tr>
-                        <tr>
+                            @foreach ($kelass as $kelas)
                             <tr>
-                                <td>
-                                    Bahasa Indonesia
-                                </td>
-                                <td>
-                                    Lorem Ipsum Color
-                                </td>
-                                <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                <td>K13</td>
-                                <td>
-                                    Lorem Ipsum Color
-                                </td>
-                                <td>
-                                    Lorem Ipsum Color
-                                </td>
+                                <td>{{ $kelas->mk_kodebaa }}</td>
+                                <td>{{ $kelas->matkul_nama }}</td>
+                                <td>{{ $kelas->mk_semester  }}</td>
+                                <td>{{ $kelas->AkaJurusan->jur_nama }}</td>
+                                <td>{{ $kelas->kurikulum_kode }}</td>
                                 <td>
                                     <!-- Button to Open the Modal -->
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal">
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal{{ $kelas->kelas_id }}">
                                         <i class="fa fa-plus-circle"></i> Tambah
                                     </button>
                                     <!-- The Modal -->
-                                    <div class="modal" id="myModal">
+                                    <div class="modal" id="myModal{{ $kelas->kelas_id }}">
                                         <div class="modal-dialog">
                                         <div class="modal-content">
-                                    
+
                                             <!-- Modal Header -->
                                             <div class="modal-header">
                                             <h4 class="modal-title">Tambah Silabus</h4>
+                                            <h5>{{ $kelas->kelas_id }}</h5>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
-                                    
                                             <!-- Modal body -->
                                             <div class="modal-body">
                                                 <table class="table table-striped table-advance table-hover">
@@ -180,32 +99,32 @@
                                                         <tr>
                                                             <td>Bahasa Indonesia </td>
                                                             <td>
-                                                                <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-plus-circle"></i> Tambah Silabus</button>  
-                                                                <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-trash "></i> Hapus</button>  
+                                                                <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-plus-circle"></i> Tambah Silabus</button>
+                                                                <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-trash "></i> Hapus</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Bahasa Inggris </td>
                                                             <td>
-                                                                <button class="btn btn-warning btn-xs" style="color: white;"><i class="fa fa-pencil"></i> Edit Silabus</button>  
-                                                                <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-trash "></i> Hapus</button>  
+                                                                <button class="btn btn-warning btn-xs" style="color: white;"><i class="fa fa-pencil"></i> Edit Silabus</button>
+                                                                <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-trash "></i> Hapus</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
-                                    
+
                                             <!-- Modal footer -->
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-info" data-dismiss="modal">Simpan</button>
                                             </div>
-                                    
+
                                         </div>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

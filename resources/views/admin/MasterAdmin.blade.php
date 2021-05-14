@@ -23,7 +23,7 @@
             </div>
             <a href="/admin/Home" class="logo"><b><span><img src="{{asset('images/stts.png')}}" class="float-center" width="40" height="40"></span><span> Silabus ISTTS</span> </b></a>
             <ul class="nav pull-right top-menu">
-                <a class="btn btn-danger btn-sm mt-3" href="/">Logout</a>
+                <a class="btn btn-danger btn-sm mt-3" href="{{ url('logout') }}">Logout</a>
             </ul>
         </header>
 
