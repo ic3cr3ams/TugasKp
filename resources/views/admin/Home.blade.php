@@ -11,23 +11,21 @@
                 <div class="col-lg-12">
                   <div class="form-panel" style="border-radius: 25px;">
                     <h4 class="mb"><i class="fa fa-sign-in"></i> Login Sebagai Dosen</h4>
-                    <form class="form-horizontal style-form" method="get">
-                      <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">Pilih Nama Dosen</label>
-                          <div class="col-sm-10">
-                            <select class="form-control">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </select>
-                          </div>
-                          <br>
-                          <div class="col-sm-2">
-                            <button type="button" class="btn btn-round btn-block btn-success">Pilih</button>
-                          </div>
-                      </div>
+                    <form class="form-horizontal style-form" method="post" action="pilihdosen">
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Pilih Nama Dosen</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="kodedosen">
+                                    @foreach ($dosen as $atr)
+                                        <option value={{$atr->dosen_kode}}>{{$atr->dosen_nama_sk }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <br>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-round btn-block btn-success">Pilih</button>
+                            </div>
+                        </div>
                     </form>
                     <h4 class="mb"><i class="fa fa-upload"></i> Upload Pedoman Silabus</h4>
                     <div class="form-group">

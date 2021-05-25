@@ -52,9 +52,23 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/wakil/matkulwarek")) ? 'active' : '' }}" href="/wakil/matkulwarek">
+                    @if (url()->current()==url("wakil/matkulwarek") || url()->current()==url("wakil/filterwarek"))
+                        <a class="active" href="/wakil/matkulwarek">
+                    @else
+                        <a class="" href="/wakil/matkulwarek">
+                    @endif
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                     <span style="font-size: 8pt;">Mata Kuliah Yang Ditugaskan</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    @if (url()->current()==url("wakil/dekanwarek") || url()->current()==url("wakil/filterdekan"))
+                        <a class="active" href="/wakil/dekanwarek">
+                    @else
+                        <a class="" href="/wakil/dekanwarek">
+                    @endif
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span style="font-size: 8pt;">Mata Kuliah Dekan</span>
                     </a>
                 </li>
                 <li class="sub-menu">
@@ -81,7 +95,6 @@
         <footer class="site-footer">
             <div class="text-center">
                 <p>
-
                 </p>
                 <div class="credits">
                 </div>

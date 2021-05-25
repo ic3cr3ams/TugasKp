@@ -9,13 +9,10 @@ use Illuminate\Support\Facades\Session;
 class LoginController extends Controller
 {
     public function login(Request $input){
-        Auth::attempt(
-            $input->only('username','password')
-        );
-        // dd(Auth::user()->isDekan(""));
-        if ($input->username == "adminbaak" && $input->pass == "useradmin123") {
-            return view("admin.Home");
+        if ($input->username == "adminbaak" && $input->password == "useradmin123") {
+            return redirect("admin/home");
         }
+        Auth::attempt($input->only('username','password'));
         if(Auth::user() !== null){
             if (Auth::user()->isWarek("1")) {
                 return redirect("wakil/home");

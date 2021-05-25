@@ -46,13 +46,21 @@
                 <h5 class="centered">{{Auth::user()->namaDenganJabatan()}}</h5>
                 <h6 class="centered">Kaprodi</h6>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/Home")) ? 'active' : '' }}" href="/kajur/Home">
+                    @if ((url()->current() == url("/kajur/home")) || url()->current() == url("/kajur/filterkajur"))
+                        <a class="active" href="/kajur/home">
+                    @else
+                        <a class="" href="/kajur/home">
+                    @endif
                     <i class="fa fa-list-alt" aria-hidden="true"></i>
                     <span>Mata Kuliah Jurusan</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/kajur/matkulkajur")) ? 'active' : '' }}" href="/kajur/matkulkajur">
+                    @if ((url()->current() == url("/kajur/matkulkajur")) || url()->current() == url("/kajur/filtermatkulkajur"))
+                        <a class="active" href="/kajur/matkulkajur">
+                    @else
+                        <a class="" href="/kajur/matkulkajur">
+                    @endif
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                     <span style="font-size: 8pt;">Mata Kuliah Yang Ditugaskan</span>
                     </a>

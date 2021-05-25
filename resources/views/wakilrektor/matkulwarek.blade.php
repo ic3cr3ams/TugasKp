@@ -2,7 +2,7 @@
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-list-alt"></i> Mata Kuliah iSTTS</h3>
+        <h3><i class="fa fa-list-alt"></i> Mata Kuliah Wakil Rektor I</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">

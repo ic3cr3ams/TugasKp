@@ -32,7 +32,7 @@
                 <ul class="sidebar-menu" id="nav-accordion">
                 <h5 class="centered">Welcome,Admin BAA</h5>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/Home")) ? 'active' : '' }}" href="/admin/Home">
+                    <a class="{{ (url()->current() == url("/admin/home")) ? 'active' : '' }}" href="/admin/home">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span>Home</span>
                     </a>

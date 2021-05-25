@@ -1,13 +1,13 @@
-@extends('kajur/MasterKajur')
+@extends('dekan/MasterDekan')
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-user-o"></i> Mata Kuliah Kaprodi</h3>
+        <h3><i class="fa fa-user-o"></i> Mata Kuliah Dekan</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                    <form method="POST" action="filtermatkulkajur">
+                    <form method="POST" action="filtermatkuldekan">
                         @csrf
                         <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
                         <div class="form-group row col-sm-11">
@@ -153,6 +153,4 @@
   <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
   <!--script for this page-->
 
-
-
-  @endsection
+@endsection

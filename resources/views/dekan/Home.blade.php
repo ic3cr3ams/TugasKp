@@ -2,16 +2,30 @@
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-list-alt"></i> Mata Kuliah Fakultas</h3>
+        <h3><i class="fa fa-list-alt"></i> Mata Kuliah Dekan</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                    <form method="POST" action="filterfakultasdekan">
+                    <form method="POST" action="filterdekanhome">
                         @csrf
                         <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
                         <div class="form-group row col-sm-11">
                             <div class="col-sm-5">
+                                <label style="font-size: 10pt;">
+                                    Program Studi
+                                </label>
+                                <select class="form-control" style="border-radius: 25px;" name="jrsn">
+                                    <option value="all">--All--</option>
+                                    @foreach ($jurusan as $j)
+                                        @if (Session::get("jurusan") == $j->jur_kode)
+                                            <option value={{$j->jur_kode}} selected>{{$j->jur_nama }}</option>
+                                        @else
+                                            <option value={{$j->jur_kode}} >{{$j->jur_nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                <br>
                                 <label style="font-size: 10pt;">
                                     Kurikulum
                                 </label>

@@ -43,13 +43,21 @@
                 <h5 class="centered">{{Auth::user()->namaDenganJabatan()}}</h5>
                 <h6 class="centered">Dekan</h6>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/dekan/home")) ? 'active' : '' }}" href="/dekan/Home">
+                    @if ((url()->current() == url("/dekan/home")) || url()->current()==url("dekan/filterdekanhome"))
+                        <a class="active" href="/dekan/home">
+                    @else
+                        <a class="" href="/dekan/home">
+                    @endif
                     <i class="fa fa-list-alt" aria-hidden="true"></i>
-                    <span>Mata Kuliah Fakultas</span>
+                    <span>Mata Kuliah Dekan</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/dekan/AssignDekan")) ? 'active' : '' }}" href="/dekan/AssignDekan">
+                    @if ((url()->current() == url("/dekan/matkuldekan")) || url()->current()==url("dekan/filtermatkuldekan"))
+                        <a class="active" href="/dekan/matkuldekan">
+                    @else
+                        <a class="" href="/dekan/matkuldekan">
+                    @endif
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                     <span style="font-size: 8pt;">Mata Kuliah Yang Ditugaskan</span>
                     </a>

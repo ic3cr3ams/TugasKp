@@ -7,35 +7,28 @@
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                    <form>
+                    <form method="POST" action="filterkajur">
+                        @csrf
                         <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
-                        <div class="form-group row col-sm-5">
-                            <div class="col-auto">
+                        <div class="form-group row col-sm-11">
+                            <div class="col-sm-5">
+                                <br>
                                 <label style="font-size: 10pt;">
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                    Program Studi
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <label style="font-size: 10pt;">
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
                                     Kurikulum
                                 </label>
+                                <select class="form-control" style="border-radius: 25px;" name="krklm">
+                                    <option value="all">--All--</option>
+                                    @foreach ($studi as $kurikulum)
+                                        @if (Session::get("kurikulum") == $kurikulum->kurikulum_kode)
+                                            <option value={{$kurikulum->kurikulum_kode}} selected>{{$kurikulum->kurikulum_kode }}</option>
+                                        @else
+                                            <option value={{$kurikulum->kurikulum_kode}}>{{$kurikulum->kurikulum_kode }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                <br>
+                            <button  class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;"><i class="fa fa-eraser"></i> Search</button>
                             </div>
-                          </div>
-                        <div>
-                                <div class="col-sm-5">
-                                    <select class="form-control" style="border-radius: 25px;">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                      </select>
-                                      <br>
-                                <button type="submit" class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;"><i class="fa fa-eraser"></i> Hapus</button>
-                              </div>
-
                         </div>
                     </form>
                     <br>
@@ -57,8 +50,8 @@
                                 <th>Kode Mata Kuliah</th>
                                 <th>Mata Kuliah</th>
                                 <th>Semester</th>
-                                <th>Program Studi</th>
                                 <th>Kurikulum</th>
+                                <th>Nama Dosen</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -68,8 +61,8 @@
                                 <td>{{ $kelas->mk_kodebaa }}</td>
                                 <td>{{ $kelas->matkul_nama }}</td>
                                 <td>{{ $kelas->mk_semester  }}</td>
-                                <td>{{ $kelas->AkaJurusan->jur_nama }}</td>
                                 <td>{{ $kelas->kurikulum_kode }}</td>
+                                <td>{{$kelas->dosen_nama_sk }}</td>
                                 <td>
                                     <!-- Button to Open the Modal -->
                                     <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal{{ $kelas->kelas_id }}">

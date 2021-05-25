@@ -1,13 +1,13 @@
-@extends('kajur/MasterKajur')
+@extends('wakilrektor/MasterWakil')
 @section('body')
 <section id="main-content">
     <section class="wrapper">
-        <h3><i class="fa fa-user-o"></i> Mata Kuliah Kaprodi</h3>
+        <h3><i class="fa fa-list-alt"></i> Mata Kuliah Dekan</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                    <form method="POST" action="filtermatkulkajur">
+                    <form method="POST" action="filterdekan">
                         @csrf
                         <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
                         <div class="form-group row col-sm-11">
@@ -33,14 +33,14 @@
                                     <option value="all">--All--</option>
                                     @foreach ($studi as $kurikulum)
                                         @if (Session::get("kurikulum") == $kurikulum->kurikulum_kode)
-                                            <option value={{$kurikulum->kurikulum_kode}} selected>{{$kurikulum->kurikulum_kode }}</option>
+                                        <option value={{$kurikulum->kurikulum_kode}} selected>{{$kurikulum->kurikulum_kode }}</option>
                                         @else
-                                            <option value={{$kurikulum->kurikulum_kode}}>{{$kurikulum->kurikulum_kode }}</option>
+                                        <option value={{$kurikulum->kurikulum_kode}}>{{$kurikulum->kurikulum_kode }}</option>
                                         @endif
                                     @endforeach
                                 </select>
                                 <br>
-                            <button  class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;"><i class="fa fa-eraser"></i> Search</button>
+                            <button  class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;" ><i class="fa fa-eraser"></i> Search</button>
                             </div>
                         </div>
                     </form>
@@ -52,9 +52,6 @@
                             <div class="form-group col-md-4">
                               <input type="text" class="form-control" id="inputSeacrh" placeholder="Nama Mata Kuliah">
                             </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn mb-2" style="background-color: #afec85"><i class="fa fa-search"></i> Cari</button>
-                              </div>
                         </div>
                     </form>
                     <table class="table table-striped table-advance table-hover" id="myTable">
@@ -140,10 +137,6 @@
         <!-- /row -->
     </section>
 </section>
-    <!-- /MAIN CONTENT -->
-    <!--main content end-->
-    <!--footer start-->
-  <!-- js placed at the end of the document so the pages load faster -->
   <script src="{{asset('asset/admin/lib/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('asset/admin/lib/bootstrap/js/bootstrap.min.js')}}"></script>
   <script class="include" type="text/javascript" src="{{asset('asset/admin/lib/jquery.dcjqaccordion.2.7.js')}}"></script>
@@ -152,7 +145,4 @@
   <!--common script for all pages-->
   <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
   <!--script for this page-->
-
-
-
   @endsection
