@@ -7,7 +7,7 @@
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                    <form method="POST" action="filterhome">
+                    <form method="POST" action="filtermatakuliah">
                         @csrf
                         <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
                         <div class="form-group row col-sm-11">

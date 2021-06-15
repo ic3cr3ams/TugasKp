@@ -158,6 +158,60 @@ class warekcontroller extends Controller
             "semua" => $semua
         ]);
     }
+    public function filtermatakuliah(Request $request)
+    {
+        $kurikulum = $request -> krklm;
+        $jrsn = $request -> jrsn;;
+        Session::put("kurikulum",$kurikulum);
+        Session::put("jurusan",$jrsn);
+        $jurusan=AkaJurusan::select(['jur_kode','jur_nama'])->get();
+        if ($kurikulum!= "all") {
+            $now = AkaPeriode::PeriodeSkrg();
+            $studi= AkaMatkulKurikulum::select("kurikulum_kode")->distinct()->get();
+            $semua =  AkaKelas::where('periode_kode',$now->periode_kode)
+                                ->join('aka_matkul_kurikulum',function($q){
+                                    $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
+                                    ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
+                                })
+                                ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen','aka_kelas.dosen_kode','tk_dosen.dosen_kode')
+                                ->where("aka_matkul_kurikulum.kurikulum_kode",session::get("kurikulum"))
+                                ->get();
+        }else if ($jrsn!= "all") {
+            $now = AkaPeriode::PeriodeSkrg();
+            $studi= AkaMatkulKurikulum::select("kurikulum_kode")->distinct()->get();
+            $semua =  AkaKelas::where('periode_kode',$now->periode_kode)
+                                ->join('aka_matkul_kurikulum',function($q){
+                                    $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
+                                    ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
+                                })
+                                ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen','aka_kelas.dosen_kode','tk_dosen.dosen_kode')
+                                ->where("aka_matkul_kurikulum.jur_kode",session::get("jurusan"))
+                                ->get();
+        }elseif($kurikulum!= "all" && $jrsn != "all"){
+            $now = AkaPeriode::PeriodeSkrg();
+            $studi= AkaMatkulKurikulum::select("kurikulum_kode")->distinct()->get();
+            $semua =  AkaKelas::where('periode_kode',$now->periode_kode)
+                                ->join('aka_matkul_kurikulum',function($q){
+                                    $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
+                                    ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
+                                })
+                                ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen','aka_kelas.dosen_kode','tk_dosen.dosen_kode')
+                                ->where("aka_matkul_kurikulum.kurikulum_kode",session::get("kurikulum"))
+                                ->where("aka_matkul_kurikulum.jur_kode",session::get("jurusan"))
+                                ->get();
+        }
+        elseif($kurikulum=="all" && $jrsn =="all"){
+            return redirect("wakil/home");
+        }
+        return view('wakilrektor.home',[
+            "studi" => $studi,
+            "jurusan" => $jurusan,
+            "semua" => $semua
+        ]);
+    }
     public function filterwarek(Request $request)
     {
         $kurikulum = $request -> krklm;

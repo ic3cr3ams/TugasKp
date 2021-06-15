@@ -5,24 +5,21 @@
         <h3><i class="fa fa-users"></i> Assign Dosen Pengisi Silabus</h3>
         <div class="row mt">
             <div class="col-md-12">
-                <div>
-                    <form>
-                        <div class="input-group mb-3 col-sm-4">
-                            <input type="text" class="form-control" placeholder="Mata Kuliah" aria-label="Mata Kuliah" aria-describedby="basic-addon2" >
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-success" style="background-color:rgb(155, 238, 155)" type="button"><i class="fa fa-search"></i></button>
-                            </div>
-                          </div>
-                    </form>
-                
-            </div>
                 <div class="content-panel"style="border-radius: 25px;">
                     <form class="col-sm-10">
                         <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
                         <div class="form-group row">
                             <div class="col-sm-9">
                                 <select class="form-control form-control-md" style="border-radius: 25px;">
-                                    <option>Small select</option>
+                                    @foreach ($dosen as $atr)
+                                        @foreach ($jumlah as $item)
+                                            @if ($item->kode_dosen == $atr->dosen_kode)
+                                                <option value={{$atr->dosen_kode}}>{{$atr->dosen_nama_sk }} {{$item->jumlah}}</option>
+                                            @else
+                                                <option value={{$atr->dosen_kode}}>{{$atr->dosen_nama_sk }} &nbsp&nbsp&nbsp&nbsp 0</option>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
                                   </select>
                             </div>
                           </div>
@@ -42,40 +39,41 @@
                               </div>
                             </div>
                     </form>
-                    <table class="table table-striped table-advance table-hover">
+                    <table class="table table-striped table-advance table-hover" id="myTable">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>Kode Mata Kuliah</th>
                                 <th>Mata Kuliah</th>
+                                <th>Semester</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
-                                <th>Semester</th>
-                                <th>Dosen</th>
+                                <th>Nama Dosen</th>
+                                <th>Pengisi Silabus</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <input type="checkbox" value="">
-                            </td>
-                            <td>Nama Matkul
-                            </td>
-                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                            <td>Lorem Ipsum</td>
-                            <td>Lorem Ipsum</td>
-                            <td style="color: red"><b>Belum Memiliki Dosen</b></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" value="" disabled>
-                            </td>
-                            <td>Nama Matkul
-                            </td>
-                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                            <td>Lorem Ipsum</td>
-                            <td>Lorem Ipsum</td>
-                            <td><b> Hartarto Junaedi</b></td>
-                        </tr>
+                            @foreach ($semua as $kelas)
+                            <tr>
+                                <td>{{ $kelas->mk_kodebaa }}</td>
+                                <td>{{ $kelas->matkul_nama }}</td>
+                                <td>{{ $kelas->mk_semester  }}</td>
+                                <td>{{ $kelas->AkaJurusan->jur_nama }}</td>
+                                <td>{{ $kelas->kurikulum_kode }}</td>
+                                <td>{{$kelas->dosen_nama_sk }}</td>
+                                <td>
+                                    <select class="js-example-basic-multiple" multiple="multiple" name="dosen">
+                                        <option value="" selected> </option>
+                                        @foreach ($dosen as $dosenn)
+                                            @foreach ($jumlah as $item)
+                                                @if ($item->kode_matkul==$semua->mk_kodebaa && $dosen->dosen_kode == $item->kode_dosen)
+                                                    <option value="{{$dosenn->dosen_nama_sk}}" selected>{{$dosenn->dosen_nama_sk}}</option>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -89,13 +87,10 @@
         <!-- /row -->
     </section>
 </section>
-  <script src="{{asset('asset/admin/lib/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('asset/admin/lib/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script class="include" type="text/javascript" src="{{asset('asset/admin/lib/jquery.dcjqaccordion.2.7.js')}}"></script>
-  <script src="{{asset('asset/admin/lib/jquery.scrollTo.min.js')}}"></script>
-  <script src="{{asset('asset/admin/lib/jquery.nicescroll.js')}}" type="text/javascript"></script>
-  <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
-
-
-
+    <script src="{{asset('asset/admin/lib/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('asset/admin/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script class="include" type="text/javascript" src="{{asset('asset/admin/lib/jquery.dcjqaccordion.2.7.js')}}"></script>
+    <script src="{{asset('asset/admin/lib/jquery.scrollTo.min.js')}}"></script>
+    <script src="{{asset('asset/admin/lib/jquery.nicescroll.js')}}" type="text/javascript"></script>
+    <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
   @endsection

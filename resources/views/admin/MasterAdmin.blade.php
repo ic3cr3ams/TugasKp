@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Dashboard">
+        <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+        <title>Silabus ISTTS</title>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <title>Silabus ISTTS</title>
-    <link href="{{asset('asset/admin/img/logo-istts.png')}}" rel="icon">
-    <link href="{{ asset('asset/admin/lib/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('asset/admin/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('asset/admin/lib/bootstrap-fileupload/bootstrap-fileupload.css') }}" />
-    <link href="{{ asset('asset/admin/css/style.css') }}" rel="stylesheet">
-</head>
+        <!-- Favicons -->
+        <link href="{{asset('asset/admin/img/logo-istts.png')}}" rel="icon">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+        {{-- Select --}}
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <!--external css-->
+        <link href="{{ asset('asset/admin/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('asset/admin/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('asset/admin/css/style-responsive.css') }}" rel="stylesheet">
+    </head>
 
 <body>
     <section id="container">
@@ -38,13 +48,13 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/MataKuliah")) ? 'active' : '' }}" href="/admin/MataKuliah">
+                    <a class="{{ (url()->current() == url("/admin/matakuliah")) ? 'active' : '' }}" href="/admin/matakuliah">
                     <i class="fa fa-file-text"></i>
                     <span>Mata Kuliah</span>
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/admin/Assign")) ? 'active' : '' }}" href="/admin/Assign">
+                    <a class="{{ (url()->current() == url("/admin/halassign")) ? 'active' : '' }}" href="/admin/halassign">
                     <i class=" fa fa-users"></i>
                     <span>Assign Dosen Silabus</span>
                     </a>
@@ -77,8 +87,16 @@
             </div>
         </footer>
     </section>
-    <script src="{{ asset('asset/admin/lib/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('asset/admin/lib/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
 </body>
 
 </html>

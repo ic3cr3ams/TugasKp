@@ -26,13 +26,12 @@ class User implements Authenticatable {
 
     //khusus dosen
     public $kodeDosen;
-
+        // https://ws.stts.edu/credential/mimi/siteRole/silabus&appname=silabus&Q=Q
     /**
      * Menginisialisasi model User menggunakan $uname yang dimasukkan
      */
     public function __construct($uname) {
         $uname = strtolower($uname);
-        // https://ws.stts.edu/credential/mimi/siteRole/silabus&appname=silabus&Q=Q
         $this->auth = new STTSWebService('credential', $uname);
 
         $this->userID = $uname;

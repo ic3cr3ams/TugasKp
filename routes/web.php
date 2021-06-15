@@ -29,8 +29,10 @@ Route::get('logout',[LoginController::class,'logout']);
 
 Route::prefix("/admin")->group(function() {
     Route::get('home', [AdminController::class,'home']);
-    Route::get('MataKuliah', function () {return view('admin.MataKuliah');});
-    Route::get('Assign', function () {return view('admin.Assign');});
+    Route::post('pilihdosen', [AdminController::class,'pilihdosen']);
+    Route::get('matakuliah',[AdminController::class,'matakuliah']);
+    Route::post('filtermatakuliah',[AdminController::class,'filtermatakuliah']);
+    Route::get('halassign', [AdminController::class,'halassign']);
     Route::get('Pengisian',[AdminController::class,'Pengisian']);
     Route::get('Deskripsi', [AdminController::class,'Deskripsi']);
 });
@@ -67,7 +69,7 @@ Route::prefix("/wakil")->group(function() {
     Route::get('home', [warekcontroller::class,'home']);
     Route::get('matkulwarek', [warekcontroller::class,'matkulwarek']);
     Route::get('dekanwarek', [warekcontroller::class,'dekanwarek']);
-    Route::post('filterhome', [warekcontroller::class,'filterhome']);
+    Route::post('filtermatakuliah', [warekcontroller::class,'filtermatakuliah']);
     Route::post('filterwarek', [warekcontroller::class,'filterwarek']);
     Route::post('filterdekan', [warekcontroller::class,'filterdekan']);
     Route::get('Unduh', [DekanController::class,'Unduh']);
