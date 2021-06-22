@@ -7,7 +7,7 @@
         <div class="row mt">
             <div class="col-md-12">
                 <div>
-                    <form method="POST" action="filterkajur">
+                    {{-- <form method="POST" action="filterkajur">
                         @csrf
                         <label style="color: black; font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
                         <div class="form-group row col-sm-11">
@@ -30,11 +30,11 @@
                             <button  class="btn mb-2" style="background-color: #ec697b;border-radius: 25px;"><i class="fa fa-eraser"></i> Search</button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
                     <br>
                 </div>
                 <div class="content-panel" style="border-radius: 25px;">
-                    <form>
+                    {{-- <form>
                         <div class="form-row col-sm-9">
                             <div class="form-group col-md-4">
                               <input type="text" class="form-control" id="inputSeacrh" placeholder="Nama Mata Kuliah">
@@ -43,8 +43,8 @@
                                 <button type="submit" class="btn mb-2" style="background-color: #afec85"><i class="fa fa-search"></i> Cari</button>
                               </div>
                         </div>
-                    </form>
-                    <table class="table table-striped table-advance table-hover" id="myTable">
+                    </form> --}}
+                    <table class="cell-border stripe" id="myTable" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Kode Mata Kuliah</th>
@@ -139,7 +139,9 @@
   <!--common script for all pages-->
   <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
   <!--script for this page-->
-
-
+<script src="
+https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css
+"></script>
+<script src="https://cdn.datatables.net/1.10.25/css/dataTables.semanticui.min.css"></script>
 
   @endsection

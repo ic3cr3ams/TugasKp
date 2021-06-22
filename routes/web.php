@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\warekcontroller;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Api\MatkulController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,6 @@ Route::get('/', function () {
 });
 Route::post('login', [LoginController::class,'login']);
 Route::get('logout',[LoginController::class,'logout']);
-
 
 Route::prefix("/admin")->group(function() {
     Route::get('home', [AdminController::class,'home']);

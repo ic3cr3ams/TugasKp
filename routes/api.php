@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\MatkulController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('matkul')->group(function(){
+    Route::get('list', [MatkulController::class, 'list']);
+    Route::get('listmatkul', [MatkulController::class, 'listmatkul']);
+    Route::post('assign', [MatkulController::class, 'assign']); //api/matkul/assign
 });
