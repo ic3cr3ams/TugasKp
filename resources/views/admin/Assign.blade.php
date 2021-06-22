@@ -34,6 +34,7 @@
                                     </label>
                                 </div>
                             </div>
+<<<<<<< Updated upstream
                         </form>
 
                         <div class="col-12">
@@ -54,6 +55,47 @@
                             </table>
                         </div>
                     </div>
+=======
+                    </form>
+                    <table class="table table-striped table-advance table-hover" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>Kode Mata Kuliah</th>
+                                <th>Mata Kuliah</th>
+                                <th>Semester</th>
+                                <th>Program Studi</th>
+                                <th>Kurikulum</th>
+                                <th>Nama Dosen</th>
+                                <th>Pengisi Silabus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($semua as $kelas)
+                            <tr>
+                                <td>{{ $kelas->mk_kodebaa }}</td>
+                                <td>{{ $kelas->matkul_nama }}</td>
+                                <td>{{ $kelas->mk_semester  }}</td>
+                                <td>{{ $kelas->AkaJurusan->jur_nama }}</td>
+                                <td>{{ $kelas->kurikulum_kode }}</td>
+                                <td>{{$kelas->dosen_nama_sk }}</td>
+                                <td>
+                                    <select class="js-example-basic-single" name="dosen">
+                                        <option value="" selected> </option>
+                                        @foreach ($dosen as $dosenn)
+                                            <option value="{{$dosenn->dosen_nama_sk}}">{{$dosenn->dosen_nama_sk}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /content-panel -->
+                <br>
+                <div class="col-sm-5">
+                    <a href="/admin/tambahPaket"><button type="submit" class="btn btn-primary" style="border-radius: 25px;"><i class="fa fa-save"></i> Simpan</button></a>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </section>

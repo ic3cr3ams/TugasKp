@@ -135,7 +135,16 @@ class AdminController extends Controller
                             ->selectRaw('count(sil_pengisi.dosen_kode) as jumlah')
                             ->groupBy('tk_dosen.dosen_kode')
                             ->get();
+<<<<<<< Updated upstream
 
+=======
+        $datajumlah = db::table('sil_dosen_makul')
+                            ->select(db::raw('count(kode_dosen) as jumlah,kode_dosen'))
+                            ->where('periode_kode',$now->periode_kode)
+                            ->groupby('kode_dosen')
+                            ->get();
+        // dd($datajumlah);
+>>>>>>> Stashed changes
         return view('admin.Assign',[
             "listdosen" => $dosen
         ]);
