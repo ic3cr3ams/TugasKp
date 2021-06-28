@@ -34,6 +34,7 @@ Route::prefix("/admin")->middleware('AdminStatus')->group(function() {
     Route::get('matakuliah',[AdminController::class,'matakuliah']);
     Route::post('filtermatakuliah',[AdminController::class,'filtermatakuliah']);
     Route::get('halassign', [AdminController::class,'halassign']);
+    Route::get('silabus/{kodedosen}/{mkkodebaa}/{periode}/{bahasa}', [AdminController::class,'silabus']);
     Route::get('Pengisian',[AdminController::class,'Pengisian']);
     Route::get('Deskripsi', [AdminController::class,'Deskripsi']);
 });
@@ -64,7 +65,7 @@ Route::prefix("/dekan")->middleware('DekanStatus')->group(function() {
     Route::get('cetak', [DekanController::class,'cetak']);
     Route::get('silabus/{kodedosen}/{mkkodebaa}/{periode}/{bahasa}', [IsiSilabus::class,'silabus']);
     Route::get('export', function () {return view('dekan.export');});
-    Route::get('verifikasi', function () {return view('dekan.verifikasi');});
+    Route::get('verifikasi', [DekanController::class,'verifikasi']);
     Route::get('home', [DekanController::class,'home']);
     Route::post('filterdekanhome', [DekanController::class,'filterdekanhome']);
     Route::get('unduh', [DekanController::class,'Unduh']);

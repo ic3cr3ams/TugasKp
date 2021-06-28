@@ -17,7 +17,7 @@
                         <div class="col-sm-10">
                             <select class="form-control select2" name="username">
                                 @foreach ($dosen as $atr)
-                                    <option value={{$atr->karyawan_intranet}}>{{$atr->dosen_nama_sk }}</option>
+                                    <option value={{$atr->dosen_kode}}>{{$atr->dosen_nama_sk }}</option>
                                 @endforeach
                             </select>
                         </div>

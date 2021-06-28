@@ -47,7 +47,7 @@
                     <br>
                 </div>
                 <div class="content-panel" style="border-radius: 25px;">
-                    <table class="table table-striped table-advance table-hover" id="myTable">
+                    <table class="cell-border striped" id="myTable">
                         <thead>
                             <tr>
                                 <th>Kode Mata Kuliah</th>

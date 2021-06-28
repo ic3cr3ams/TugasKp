@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Session;
 class IsiSilabus extends Controller
 {
     public function silabus($kode_dosen,$mk_kodebaa,$kurikulum_kode,$bahasa)
-    {
+    {   
         if ($bahasa=="i") {
             $status =  SilPengisi::where('mk_kodebaa',$mk_kodebaa)
                                 ->where('kurikulum_kode',$kurikulum_kode)

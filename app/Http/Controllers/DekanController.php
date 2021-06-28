@@ -252,9 +252,10 @@ class DekanController extends Controller
             "jurusan" =>$jurusan
         ]);
     }
-
     public function matkuljurusan(Type $var = null)
     {
+        Session::forget("jurusan");
+        Session::forget("kurikulum");
         $jurusan = Auth::user()->jurusanKajur;
         foreach ($jurusan as $key => $value) {
             $jurusan = $value->jur_kode;
@@ -280,7 +281,6 @@ class DekanController extends Controller
             "dosen" => $dosen,
         ]);
     }
-
     public function cetak(Type $var = null)
     {
         $dosen_kode = Auth::user()->kodeDosen;
@@ -301,6 +301,36 @@ class DekanController extends Controller
                                 ->get();
         return view('dekan.cetak',[
             "kelass"=>$matkul_list
+        ]);
+    }
+    public function verifikasi(Type $var = null)
+    {
+        Session::forget("jurusan");
+        Session::forget("kurikulum");
+        $jurusan = Auth::user()->jurusanKajur;
+        foreach ($jurusan as $key => $value) {
+            $jurusan = $value->jur_kode;
+        }
+
+        $silabus = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                    ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                            })
+                            ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                            ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                            ->join('sil_pengisi','sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                            ->where('aka_jurusan.jur_kode',$jurusan)
+                            ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode')
+                            ->get();
+        $dosen = TkDosen::where('dosen_status','1')
+                            ->join('Tk_Karyawan','Tk_Karyawan.karyawan_nip','Tk_Dosen.karyawan_nip')
+                            ->where('dosen_nama_sk','!=','')
+                            ->orderBy('tk_karyawan.karyawan_nama','asc')
+                            ->groupBy('tk_dosen.dosen_kode')
+                            ->get();
+        return view('dekan.verifikasi',[
+            "silabus" => $silabus,
+            "dosen" => $dosen
         ]);
     }
     public function Unduh(Request $input){}

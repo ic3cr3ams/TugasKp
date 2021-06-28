@@ -6,7 +6,9 @@ use App\Models\AkaJurusan;
 use App\Models\AkaKelas;
 use App\Models\AkaMatkulKurikulum;
 use App\Models\AkaPeriode;
+use App\Models\Sil_Data;
 use App\Models\Sil_Dosen_Makul;
+use App\Models\SilPengisi;
 use App\Models\TkDosen;
 use App\Models\TkKaryawan;
 use Illuminate\Http\Request;
@@ -31,21 +33,28 @@ class AdminController extends Controller
     }
     public function pilihdosen(Request $request)
     {
-        Auth::attempt($request->only('username','password'));
-        if(Auth::user() !== null){
-            if (Auth::user()->isWarek("1")) {
-                return redirect("wakil/home");
-            }
-            else if (Auth::user()->isDekan("")) {
-                return redirect("dekan/home");
-            }
-            else if (Auth::user()->isKajur()) {
-                return redirect("kajur/home");
-            }
-            else if (Auth::user()->isDosen()) {
-                return redirect('dosen/home');
-            }
-        }
+        $dosen_kode =$request->username;
+        $nama = TkDosen::where('dosen_kode',$dosen_kode)->get('dosen_nama_sk');
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                            $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                        })
+                        ->join('sil_pengisi',function ($e)
+                        {
+                            $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                        })
+                        ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                        ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                        ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                        ->where('sil_pengisi.dosen_kode',$dosen_kode)
+                        ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode')
+                        ->get();
+        return view('admin.logdosen',[
+            'dosen_kode' => $dosen_kode,
+            'nama' => $nama,
+            'kelass' =>$matkul_list
+        ]);
     }
 
     public function matakuliah(Request $request)
@@ -127,6 +136,35 @@ class AdminController extends Controller
 
         return view('admin.Assign',[
             "listdosen" => $dosen
+        ]);
+    }
+
+    public function silabus($dosen_kode,$mk_kodebaa,$kurikulum_kode,$bahasa)
+    {
+        if ($bahasa=="i") {
+            $status =  SilPengisi::where('mk_kodebaa',$mk_kodebaa)
+                                ->where('kurikulum_kode',$kurikulum_kode)
+                                ->get('sd_status_ind');
+        } else  $status =  SilPengisi::where('mk_kodebaa',$mk_kodebaa)
+                            ->where('kurikulum_kode',$kurikulum_kode)
+                            ->get('sd_status_eng');
+        $data = Sil_Data::where('mk_kodebaa',$mk_kodebaa)
+                            ->where('kurikulum_kode',$kurikulum_kode)
+                            ->get();
+        $matkul_nama = AkaMatkulKurikulum::where('aka_matkul_kurikulum.mk_kodebaa',$mk_kodebaa)
+                                        ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
+                                        ->where('aka_matkul_kurikulum.kurikulum_kode',$kurikulum_kode)
+                                        ->get();
+        $nama =         $nama = TkDosen::where('dosen_kode',$dosen_kode)->get('dosen_nama_sk');
+        return view('admin.silabus',[
+            "kodedosen" => $dosen_kode,
+            "mk_kodebaa" =>$mk_kodebaa,
+            "periode" => $kurikulum_kode,
+            "bahasa" =>$bahasa,
+            "status" =>$status,
+            "matkul_nama" => $matkul_nama,
+            "data" =>$data,
+            "nama" => $nama
         ]);
     }
     public function Deskripsi(Request $input){}

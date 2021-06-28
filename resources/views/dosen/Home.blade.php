@@ -36,7 +36,7 @@
                                             @endif btn-xs"
                                             data-toggle="modal" data-target="#myModal_{{ $kelas->mk_kodebaa.$kelas->kurikulum_kode}}">
 
-                                            @if ($kelas->sd_status!=0) <i class="fa fa-pencil"></i> Edit
+                                            @if ($kelas->sd_status_ind!=0 && $kelas->sd_status_eng!=0) <i class="fa fa-pencil"></i> Edit
                                             @else <i class="fa fa-plus-circle"></i> Tambah
                                             @endif
                                         </button>
@@ -48,7 +48,7 @@
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
                                                 <h4 class="modal-title">
-                                                    @if ($kelas->sd_status!=0) Edit
+                                                    @if ($kelas->sd_status_ind!=0 && $kelas->sd_status_eng!=0)  Edit
                                                     @else Tambah
                                                     @endif Silabus {{$kelas->matkul_nama}} {{$kelas->kurikulum_kode}}</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>

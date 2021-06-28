@@ -21,7 +21,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach ($kelass as $kelas)
+                                @foreach ($kelass as $kelas)
                                 <tr>
                                     <td>{{ $kelas->mk_kodebaa }}</td>
                                     <td>{{ $kelas->matkul_nama }}</td>
@@ -30,13 +30,13 @@
                                     <td>{{ $kelas->kurikulum_kode }}</td>
                                     <td>
                                         <button type="button" class="btn
-                                            @if ($kelas->sd_status==3) btn-success
-                                            @elseif($kelas->sd_status==0) btn-danger
+                                            @if ($kelas->sd_status_ind==3 && $kelas->sd_status_eng==3) btn-success
+                                            @elseif($kelas->sd_status_ind==0 && $kelas->sd_status_eng==0)btn-danger
                                             @else btn-warning
                                             @endif btn-xs"
                                             data-toggle="modal" data-target="#myModal_{{ $kelas->mk_kodebaa.$kelas->kurikulum_kode}}">
 
-                                            @if ($kelas->sd_status!=0) <i class="fa fa-pencil"></i> Edit
+                                            @if ($kelas->sd_status_ind!=0 && $kelas->sd_status_eng!=0) <i class="fa fa-pencil"></i> Edit
                                             @else <i class="fa fa-plus-circle"></i> Tambah
                                             @endif
                                         </button>
@@ -48,7 +48,7 @@
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
                                                 <h4 class="modal-title">
-                                                    @if ($kelas->sd_status!=0) Edit
+                                                    @if ($kelas->sd_status_ind!=0 && $kelas->sd_status_eng!=0)  Edit
                                                     @else Tambah
                                                     @endif Silabus {{$kelas->matkul_nama}} {{$kelas->kurikulum_kode}}</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -70,12 +70,13 @@
                                                                     <button id="{{$kelas->mk_kodebaa.$kelas->kurikulum_kode}}i"
                                                                     name="{{$kelas->mk_kodebaa.$kelas->kurikulum_kode}}"
                                                                     class="btn
-                                                                    @if ($kelas->sd_status==3 || $kelas->sd_status==2) btn-success
-                                                                    @elseif($kelas->sd_status==0) btn-danger
-                                                                    @elseif($kelas->sd_status==1) btn-warning
+                                                                    @if ($kelas->sd_status_ind==3) btn-success
+                                                                    @elseif($kelas->sd_status_ind==0) btn-danger
+                                                                    @elseif($kelas->sd_status_ind==1) btn-info
+                                                                    @elseif($kelas->sd_status_ind==2) btn-danger
                                                                     @endif
                                                                     btn-xs" style="color: white;">
-                                                                    @if ($kelas->sd_status!=0) <i class="fa fa-pencil"></i> Edit
+                                                                    @if ($kelas->sd_status_ind!=0) <i class="fa fa-pencil"></i> Edit
                                                                     @else <i class="fa fa-plus-circle"></i> Tambah
                                                                     @endif
                                                                     Silabus</button>
@@ -87,11 +88,12 @@
                                                                     <button id="{{$kelas->mk_kodebaa.$kelas->kurikulum_kode}}e"
                                                                     name="{{$kelas->mk_kodebaa.$kelas->kurikulum_kode}}"
                                                                     class="btn
-                                                                    @if ($kelas->sd_status==3 || $kelas->sd_status==1 ) btn-success
-                                                                    @elseif($kelas->sd_status==0) btn-danger
-                                                                    @elseif($kelas->sd_status==2) btn-warning
+                                                                    @if ($kelas->sd_status_eng==3) btn-success
+                                                                    @elseif($kelas->sd_status_eng==0) btn-danger
+                                                                    @elseif($kelas->sd_status_eng==1) btn-info
+                                                                    @elseif($kelas->sd_status_eng==2) btn-danger
                                                                     @endif btn-xs" style="color: white;">
-                                                                    @if ($kelas->sd_status!=0) <i class="fa fa-pencil"></i> Edit
+                                                                    @if ($kelas->sd_status_eng!=0) <i class="fa fa-pencil"></i> Edit
                                                                     @else <i class="fa fa-plus-circle"></i> Tambah
                                                                     @endif Silabus</button>
                                                                 </td>
@@ -109,14 +111,14 @@
                                         var kodebaa = $(this).attr('name').slice(0,5);
                                         var periode = $(this).attr('name').slice(5,9);
                                         var dosen_kode =  $('#dosen_kode').val();
-                                        var url = "{{ url('kajur/silabus') }}";
+                                        var url = "{{ url('dosen/silabus') }}";
                                         window.open(url+"/"+dosen_kode+"/"+kodebaa+"/"+periode+"/i");
                                     })
                                     $('#{{$kelas->mk_kodebaa.$kelas->kurikulum_kode}}e').click(function(e) {
                                         var kodebaa = $(this).attr('name').slice(0,5);
                                         var kurikulum_kode = $(this).attr('name').slice(5,9);
                                         var dosen_kode =  $('#dosen_kode').val();
-                                        var url = "{{ url('kajur/silabus') }}";
+                                        var url = "{{ url('dosen/silabus') }}";
                                         window.open(url+"/"+dosen_kode+"/"+kodebaa+"/"+kurikulum_kode+"/e");
                                     })
                                 </script>
