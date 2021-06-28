@@ -26,7 +26,7 @@ class User implements Authenticatable {
 
     //khusus dosen
     public $kodeDosen;
-        // https://ws.stts.edu/credential/mimi/siteRole/silabus&appname=silabus&Q=Q
+        // https://ws.stts.edu/credential/mimi/isDosen/silabus&appname=silabus&Q=Q
     /**
      * Menginisialisasi model User menggunakan $uname yang dimasukkan
      */
@@ -56,7 +56,6 @@ class User implements Authenticatable {
 
         $this->menu = $this->GetMenu();
     }
-
     /**
      * Mendapatkan nama dari objek user
      * Contoh : Adi Budi
@@ -87,7 +86,7 @@ class User implements Authenticatable {
      * @param  String $role
      * @return String
      */
-    protected function getNamaDariRole() {
+    public function getNamaDariRole() {
         switch ($this->kodeRole) {
             case '20':
                 return 'Admin SIM';

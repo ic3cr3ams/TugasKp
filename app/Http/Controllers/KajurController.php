@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AkaJurusan;
 use App\Models\AkaKelas;
-use App\Models\AkaMatkulKurikulum;
 use App\Models\AkaPeriode;
+use App\Models\SilPengisi;
+use App\Models\TkDosen;
 use Illuminate\Support\Facades\Session;
 
 class KajurController extends Controller
@@ -20,33 +21,25 @@ class KajurController extends Controller
         foreach ($jurusan as $key => $value) {
             $jurusan = $value->jur_kode;
         }
-        $now = AkaPeriode::PeriodeSkrg();
-        $kelass = AkaKelas::where('periode_kode',$now->periode_kode)
-                            ->join('aka_matkul_kurikulum',function($q){
-                                $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
-                                ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
+        $kelass = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                    ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
                             })
-                            ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
-                            ->join('aka_jurusan','aka_jurusan.jur_kode','aka_kelas.jur_kode')
-                            ->join('tk_dosen','aka_kelas.dosen_kode','tk_dosen.dosen_kode')
+                            ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                            ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
                             ->where('aka_jurusan.jur_kode',$jurusan)
+                            ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode')
                             ->get();
-        $studi=  AkaKelas::where('periode_kode',$now->periode_kode)
-                            ->join('aka_matkul_kurikulum',function($q){
-                                $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
-                                ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
-                            })
-                            ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
-                            ->join('aka_jurusan','aka_jurusan.jur_kode','aka_kelas.jur_kode')
-                            ->join('tk_dosen','aka_kelas.dosen_kode','tk_dosen.dosen_kode')
-                            ->where('aka_jurusan.jur_kode',$jurusan)
-                            ->distinct()
-                            ->orderBy('kurikulum_kode')
-                            ->get('kurikulum_kode');
-
-        return view('kajur.Home',[
+        $silpengisi = SilPengisi::all();
+        $dosen = TkDosen::where('dosen_status', '1')
+                            ->join('Tk_Karyawan', 'Tk_Karyawan.karyawan_nip', 'Tk_Dosen.karyawan_nip')
+                            ->where('dosen_nama_sk', '!=', '')
+                            ->orderBy('tk_karyawan.karyawan_nama','asc')
+                            ->get();
+        return view('kajur.home',[
             "kelass" => $kelass,
-            "studi" => $studi
+            "silpengisi"=>$silpengisi,
+            "dosen" => $dosen,
         ]);
     }
     public function filterkajur(Request $request)
@@ -84,42 +77,34 @@ class KajurController extends Controller
                                 ->get();
         }
         else return redirect('kajur/home');
-        return view('kajur.Home',[
+        return view('kajur.home',[
             "kelass" => $kelass,
             "studi" => $studi
         ]);
     }
-
     public function matkulkajur(Request $request)
     {
         Session::forget("jurusan");
         Session::forget("kurikulum");
         $dosen_kode = Auth::user()->kodeDosen;
-        $now = AkaPeriode::PeriodeSkrg();
-        $kelass = AkaKelas::where('periode_kode',$now->periode_kode)
-                            ->join('aka_matkul_kurikulum',function($q){
-                                $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
-                                ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
-                            })
-                            ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
-                            ->where('dosen_kode',$dosen_kode)
-                            ->get();
-
-        $jurusan=AkaJurusan::select("jur_nama",'jur_kode')->get();
-        $studi= AkaKelas::where('periode_kode',$now->periode_kode)
-                            ->join('aka_matkul_kurikulum',function($q){
-                                $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
-                                ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
-                            })
-                            ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
-                            ->where('dosen_kode',$dosen_kode)
-                            ->distinct()
-                            ->orderBy("kurikulum_kode","asc")
-                            ->get("kurikulum_kode");
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                    $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                        ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                                })
+                                ->join('sil_pengisi',function ($e)
+                                {
+                                    $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                        ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                                })
+                                ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                                ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                                ->where('sil_pengisi.dosen_kode',$dosen_kode)
+                                ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode')
+                                ->get();
         return view('kajur.matkulkajur',[
-            "kelass" => $kelass,
-            "studi" => $studi,
-            "jurusan" => $jurusan,
+            "kelass" => $matkul_list,
+            "dosen_kode" =>$dosen_kode
         ]);
     }
     public function filtermatkulkajur(Request $request)
@@ -184,5 +169,77 @@ class KajurController extends Controller
             "jurusan" => $jurusan,
         ]);
     }
+    public function assign(Type $var = null)
+    {
+        Session::forget("jurusan");
+        Session::forget("kurikulum");
+        $dosen = TkDosen::where('dosen_status','1')
+                            ->join('Tk_Karyawan','Tk_Karyawan.karyawan_nip','Tk_Dosen.karyawan_nip')
+                            ->where('dosen_nama_sk','!=','')
+                            ->orderBy('tk_karyawan.karyawan_nama','asc')
+                            ->groupBy('tk_dosen.dosen_kode')
+                            ->get();
+        $jurusan = Auth::user()->jurusanKajur;
+        foreach ($jurusan as $key => $value) {
+            $jurusan = $value->jur_kode;
+        }
+        return view('kajur.assign',[
+            "listdosen" => $dosen,
+            "jurusan" =>$jurusan
+        ]);
+    }
+    public function cetak(Type $var = null)
+    {
+        $dosen_kode = Auth::user()->kodeDosen;
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                    $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                        ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                                })
+                                ->join('sil_pengisi',function ($e)
+                                {
+                                    $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                        ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                                })
+                                ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                                ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                                ->where('sil_pengisi.dosen_kode',$dosen_kode)
+                                ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode')
+                                ->get();
+        return view('kajur.cetak',[
+            "kelass"=>$matkul_list
+        ]);
+    }
     public function Unduh(Request $input){}
+
+    public function verifikasi(Type $var = null)
+    {
+        Session::forget("jurusan");
+        Session::forget("kurikulum");
+        $jurusan = Auth::user()->jurusanKajur;
+        foreach ($jurusan as $key => $value) {
+            $jurusan = $value->jur_kode;
+        }
+
+        $silabus = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                    ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                            })
+                            ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                            ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                            ->join('sil_pengisi','sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                            ->where('aka_jurusan.jur_kode',$jurusan)
+                            ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode')
+                            ->get();
+        $dosen = TkDosen::where('dosen_status','1')
+                            ->join('Tk_Karyawan','Tk_Karyawan.karyawan_nip','Tk_Dosen.karyawan_nip')
+                            ->where('dosen_nama_sk','!=','')
+                            ->orderBy('tk_karyawan.karyawan_nama','asc')
+                            ->groupBy('tk_dosen.dosen_kode')
+                            ->get();
+        return view('kajur.verifikasi',[
+            "silabus" => $silabus,
+            "dosen" => $dosen
+        ]);
+    }
 }

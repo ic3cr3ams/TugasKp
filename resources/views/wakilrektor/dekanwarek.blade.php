@@ -47,13 +47,6 @@
                     <br>
                 </div>
                 <div class="content-panel" style="border-radius: 25px;">
-                    <form>
-                        <div class="form-row col-sm-9">
-                            <div class="form-group col-md-4">
-                              <input type="text" class="form-control" id="inputSeacrh" placeholder="Nama Mata Kuliah">
-                            </div>
-                        </div>
-                    </form>
                     <table class="table table-striped table-advance table-hover" id="myTable">
                         <thead>
                             <tr>
@@ -62,7 +55,7 @@
                                 <th>Semester</th>
                                 <th>Program Studi</th>
                                 <th>Kurikulum</th>
-                                <th>Action</th>
+                                <th>Nama Dosen</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,57 +67,22 @@
                                 <td>{{ $kelas->AkaJurusan->jur_nama }}</td>
                                 <td>{{ $kelas->kurikulum_kode }}</td>
                                 <td>
-                                    <!-- Button to Open the Modal -->
-                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal{{ $kelas->kelas_id }}">
-                                        <i class="fa fa-plus-circle"></i> Tambah
-                                    </button>
-                                    <!-- The Modal -->
-                                    <div class="modal" id="myModal{{ $kelas->kelas_id }}">
-                                        <div class="modal-dialog">
-                                        <div class="modal-content">
-
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                            <h4 class="modal-title">Tambah Silabus</h4>
-                                            <h5>{{ $kelas->kelas_id }}</h5>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                                <table class="table table-striped table-advance table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Silabus</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Bahasa Indonesia </td>
-                                                            <td>
-                                                                <button class="btn btn-success btn-xs" style="color: white;"><i class="fa fa-plus-circle"></i> Tambah Silabus</button>
-                                                                <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-trash "></i> Hapus</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Bahasa Inggris </td>
-                                                            <td>
-                                                                <button class="btn btn-warning btn-xs" style="color: white;"><i class="fa fa-pencil"></i> Edit Silabus</button>
-                                                                <button class="btn btn-danger btn-xs" style="color: white;"><i class="fa fa-trash "></i> Hapus</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-info" data-dismiss="modal">Simpan</button>
-                                            </div>
-
-                                        </div>
-                                        </div>
-                                    </div>
+                                    @php
+                                    $hasil="";
+                                    foreach ($dosen as $atr){
+                                        foreach ($silpengisi as $item){
+                                        if ($item->mk_kodebaa == $kelas->mk_kodebaa){
+                                            if ($item->kurikulum_kode == $kelas->kurikulum_kode){
+                                                    if ($atr->dosen_kode == $item->dosen_kode) echo($atr->dosen_nama_sk);
+                                                    $hasil="ada";
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if ($hasil=="") {
+                                        echo "Dosen Belum Terpilih";
+                                    }
+                                    @endphp
                                 </td>
                             </tr>
                         @endforeach

@@ -6,63 +6,49 @@ use App\Models\AkaJurusan;
 use App\Models\AkaKelas;
 use App\Models\AkaMatkulKurikulum;
 use App\Models\AkaPeriode;
+use App\Models\SilPengisi;
+use App\Models\TkDosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
+use Yajra\DataTables\DataTables;
 class warekcontroller extends Controller
 {
     public function home(Request $request)
     {
         Session::forget("jurusan");
         Session::forget("kurikulum");
-        $now = AkaPeriode::PeriodeSkrg();
         $jurusan=AkaJurusan::select('jur_nama','jur_kode')->get();
         $studi= AkaMatkulKurikulum::select("kurikulum_kode")->distinct()->get();
-        $semua =  AkaKelas::where('periode_kode',$now->periode_kode)
-                            ->join('aka_matkul_kurikulum',function($q){
-                                $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
-                                ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
-                            })
-                            ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
-                            ->join('tk_dosen','aka_kelas.dosen_kode','tk_dosen.dosen_kode')
-                            ->get();
-        return view('wakilrektor.home',[
-            "studi" => $studi,
-            "jurusan" => $jurusan,
-            "semua" => $semua
-        ]);
+
+            return view('wakilrektor.home',[
+                "studi" => $studi,
+                "jurusan" => $jurusan
+            ]);
     }
     public function matkulwarek()
     {
         Session::forget("jurusan");
         Session::forget("kurikulum");
         $dosen_kode = Auth::user()->kodeDosen;
-        $now = AkaPeriode::PeriodeSkrg();
-        $kelass = AkaKelas::where('periode_kode',$now->periode_kode)
-                            ->join('aka_matkul_kurikulum',function($q){
-                                $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
-                                ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
-                            })
-                            ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
-                            ->where('dosen_kode',$dosen_kode)
-                            ->get();
-
-        $jurusan=AkaJurusan::select("jur_nama",'jur_kode')->get();
-        $studi= AkaKelas::where('periode_kode',$now->periode_kode)
-                        ->join('aka_matkul_kurikulum',function($q){
-                            $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
-                            ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
-                        })
-                        ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
-                        ->where('dosen_kode',$dosen_kode)
-                        ->distinct()
-                        ->orderBy("kurikulum_kode","asc")
-                        ->get("kurikulum_kode");
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                    $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                        ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                                })
+                                ->join('sil_pengisi',function ($e)
+                                {
+                                    $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                        ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                                })
+                                ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                                ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                                ->where('sil_pengisi.dosen_kode',$dosen_kode)
+                                ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode')
+                                ->get();
         return view('wakilrektor.matkulwarek',[
-            "kelass" => $kelass,
-            "studi" => $studi,
-            "jurusan" => $jurusan,
+        "kelass"=>$matkul_list,
+        "dosen_kode" =>$dosen_kode
         ]);
     }
     public function dekanwarek()
@@ -74,8 +60,8 @@ class warekcontroller extends Controller
         $fakultas = Auth::user()->dekanFakultas;
         $jurusan = Auth::user()->jurusanDekan;
         // ------------------------ Isi Kelas ------------------------ //
-        $kelass = AkaKelas::where('periode_kode',$now->periode_kode)
-                            ->join('aka_matkul_kurikulum',function($q){
+
+        $kelass = AkaKelas::join('aka_matkul_kurikulum',function($q){
                                 $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
                                 ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
                             })
@@ -84,8 +70,8 @@ class warekcontroller extends Controller
                             ->join('aka_jurusan','aka_kelas.jur_kode','aka_jurusan.jur_kode')
                             ->where('aka_jurusan.jur_fakultas',$fakultas)
                             ->orderBy('jur_fakultas')
+                            ->groupBy('mk_kodebaa','matkul_nama','mk_semester','jur_nama','kurikulum_kode')
                             ->get();
-        // ------------------------ Isi Kurikulum ------------------------ //
         $studi= AkaKelas::where('periode_kode',$now->periode_kode)
                             ->join('aka_matkul_kurikulum',function($q){
                                 $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
@@ -95,13 +81,27 @@ class warekcontroller extends Controller
                             ->join('tk_dosen','aka_kelas.dosen_kode','tk_dosen.dosen_kode')
                             ->join('aka_jurusan','aka_kelas.jur_kode','aka_jurusan.jur_kode')
                             ->where('aka_jurusan.jur_fakultas',$fakultas)
+                            ->orderBy('jur_fakultas')
                             ->orderBy('kurikulum_kode')
                             ->distinct()
                             ->get('kurikulum_kode');
+
+        $dosen = TkDosen::where('dosen_status','1')
+                            ->join('Tk_Karyawan','Tk_Karyawan.karyawan_nip','Tk_Dosen.karyawan_nip')
+                            ->leftJoin('sil_pengisi','sil_pengisi.dosen_kode','tk_dosen.dosen_kode')
+                            ->where('dosen_nama_sk','!=','')
+                            ->orderBy('tk_karyawan.karyawan_nama','asc')
+                            ->select('*')
+                            ->selectRaw('count(sil_pengisi.dosen_kode) as jumlah')
+                            ->groupBy('tk_dosen.dosen_kode')
+                            ->get();
+        $silpengisi = SilPengisi::all();
         return view('wakilrektor.dekanwarek',[
-            "kelass" => $kelass,
-            "studi" => $studi,
-            "jurusan" => $jurusan,
+        "kelass" => $kelass,
+        "studi" => $studi,
+        "jurusan" => $jurusan,
+        "silpengisi" => $silpengisi,
+        "dosen" =>$dosen
         ]);
     }
     public function filterhome(Request $request)
@@ -348,6 +348,29 @@ class warekcontroller extends Controller
             "kelass" => $kelass,
             "studi" => $studi,
             "jurusan" => $jurusan,
+        ]);
+    }
+
+    public function cetak(Type $var = null)
+    {
+        $dosen_kode = Auth::user()->kodeDosen;
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                    $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                        ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                                })
+                                ->join('sil_pengisi',function ($e)
+                                {
+                                    $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                        ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                                })
+                                ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                                ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                                ->where('sil_pengisi.dosen_kode',$dosen_kode)
+                                ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode')
+                                ->get();
+        return view('wakilrektor.cetak',[
+            "kelass"=>$matkul_list
         ]);
     }
 }

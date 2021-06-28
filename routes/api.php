@@ -15,7 +15,13 @@ use App\Http\Controllers\Api\MatkulController;
 |
 */
 Route::prefix('matkul')->group(function(){
+    Route::get('slctddosen/{kodedosen}', [MatkulController::class, 'slctddosen']);
+    Route::get('pengisikosong', [MatkulController::class, 'pengisikosong']);
     Route::get('list', [MatkulController::class, 'list']);
     Route::get('listmatkul', [MatkulController::class, 'listmatkul']);
-    Route::post('assign', [MatkulController::class, 'assign']); //api/matkul/assign
+    //---------KAJUR
+    Route::get('listmatkulkajur/{jurusan}', [MatkulController::class, 'listmatkulkajur']);
+    Route::get('slctddosenjurusan/{kodedosen}/{jurusan}', [MatkulController::class, 'slctddosenjurusan']);
+    Route::get('pengisikosongjurusan/{jurusan}', [MatkulController::class, 'pengisikosongjurusan']);
+    Route::post('assign', [MatkulController::class, 'assign']);
 });

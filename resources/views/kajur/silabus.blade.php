@@ -1,12 +1,20 @@
-@extends('dosen/MasterDosen')
+@extends('kajur/MasterKajur')
 @section('body')
 <section id="main-content">
     <section class="wrapper">
         <br>
-      <h3><i class="fa fa-angle-right"></i> Add Silabus</h3>
-      <h5>Nama Matkul</h5>
-      <h5>Bahasa Inggris</h5>
-      <h5>3 SKS</h5>
+      <h1><i class="fa fa-angle-right"></i>
+        @foreach ($status as $item)
+        @if ($item->sd_status=="0") Tambah
+        @else Edit
+        @endif Silabus</h1>
+        @endforeach
+      <h3>@foreach ($matkul_nama as $item) {{$item['matkul_nama']}} </h3>
+      <h5>Silabus @if ($bahasa=="i") Bahasa Indonesia
+        @else Bahasa Inggris
+      @endif </h5>
+      <h5>{{$item->mk_sks}} SKS</h5>
+      @endforeach
       <!-- BASIC FORM ELELEMNTS -->
       <div class="row mt">
         <div class="col-lg-12">
@@ -204,7 +212,7 @@
                     </div>
                   </div>
             </form>
-            <button class="btn btn-info"><i class="fa fa-save"></i> Save </button>
+            <button class="btn btn-info"><i class="fa fa-save"></i> Simpan </button>
           </div>
         </div>
         <!-- col-lg-12-->
@@ -225,4 +233,4 @@
   <!--common script for all pages-->
   <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
   <!--script for this page-->
-  @endsection
+@endsection

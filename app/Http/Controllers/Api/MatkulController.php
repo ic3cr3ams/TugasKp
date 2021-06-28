@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\AkaKelas;
 use App\Models\AkaPeriode;
 use App\Models\SilPengisi;
 use App\Models\TkDosen;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
+
 class MatkulController extends Controller
 {
+    // --------------------------ADMIN
     public function list(Request $request)
     {
         $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
@@ -22,7 +24,8 @@ class MatkulController extends Controller
                                 ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
                                 ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
                                 ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
-                                ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode");
+                                ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode")
+                                ->groupBy('mk_kodebaa','matkul_nama','mk_semester','jur_nama','kurikulum_kode');
 
         $dosen = TkDosen::where('dosen_status', '1')
                                 ->join('Tk_Karyawan', 'Tk_Karyawan.karyawan_nip', 'Tk_Dosen.karyawan_nip')
@@ -49,7 +52,8 @@ class MatkulController extends Controller
                                 ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
                                 ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
                                 ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
-                                ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode");
+                                ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode")
+                                ->groupBy('mk_kodebaa','matkul_nama','mk_semester','jur_nama','kurikulum_kode');
 
         $dosen = TkDosen::where('dosen_status', '1')
                                 ->join('Tk_Karyawan', 'Tk_Karyawan.karyawan_nip', 'Tk_Dosen.karyawan_nip')
@@ -67,25 +71,194 @@ class MatkulController extends Controller
                             ->make(true);
     }
 
+    public function pengisikosong(Request $result)
+    {
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                    ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                            })
+                            ->join('sil_pengisi',function ($e)
+                            {
+                                $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                    ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                            })
+                            ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                            ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                            ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                            ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "aka_matkul_kurikulum.kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode")
+                            ->groupBy('mk_kodebaa','matkul_nama','mk_semester','jur_nama','kurikulum_kode');
+
+        $dosen = TkDosen::where('dosen_status', '1')
+                            ->join('Tk_Karyawan', 'Tk_Karyawan.karyawan_nip', 'Tk_Dosen.karyawan_nip')
+                            ->where('dosen_nama_sk', '!=', '')
+                            ->orderBy('tk_karyawan.karyawan_nama','asc')
+                            ->get();
+
+        $dosen_matkul_list = SilPengisi::all();
+        return DataTables::of($matkul_list)
+                            ->addColumn('action', function ($row) use ($dosen,$dosen_matkul_list) {
+                                $actionBtn = view('partial.select2_dosen',['dosen'=>$dosen,'list_dosen'=>$dosen_matkul_list,'selected'=>$row]);
+                                return $actionBtn;
+                            })
+                            ->rawColumns(['action'])
+                            ->make(true);
+    }
+
+    public function slctddosen($kode)
+    {
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                    $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                        ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                                })
+                                ->join('sil_pengisi',function ($e)
+                                {
+                                    $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                        ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                                })
+                                ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                                ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                                ->where('sil_pengisi.dosen_kode',$kode)
+                                ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "aka_matkul_kurikulum.kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode")
+                                ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode');
+        $dosen = TkDosen::where('dosen_status', '1')
+                ->join('Tk_Karyawan', 'Tk_Karyawan.karyawan_nip', 'Tk_Dosen.karyawan_nip')
+                ->where('dosen_nama_sk', '!=', '')
+                ->orderBy('tk_karyawan.karyawan_nama','asc')
+                ->get();
+        $dosen_matkul_list = SilPengisi::all();
+
+        return DataTables::of($matkul_list)
+                ->addColumn('action', function ($row) use ($dosen,$dosen_matkul_list) {
+                    $actionBtn = view('partial.select2_dosen',['dosen'=>$dosen,'list_dosen'=>$dosen_matkul_list,'selected'=>$row]);
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+    }
+    // ---------------------------------------------------------
+    // ----------------------------Kajur
+    public function pengisikosongjurusan($jurusan)
+    {
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                    ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                            })
+                            ->join('sil_pengisi',function ($e)
+                            {
+                                $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                    ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                            })
+                            ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                            ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                            ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                            ->where('aka_jurusan.jur_kode',$jurusan)
+                            ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "aka_matkul_kurikulum.kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode")
+                            ->groupBy('mk_kodebaa','matkul_nama','mk_semester','jur_nama','kurikulum_kode');
+
+        $dosen = TkDosen::where('dosen_status', '1')
+                            ->join('Tk_Karyawan', 'Tk_Karyawan.karyawan_nip', 'Tk_Dosen.karyawan_nip')
+                            ->where('dosen_nama_sk', '!=', '')
+                            ->orderBy('tk_karyawan.karyawan_nama','asc')
+                            ->get();
+
+        $dosen_matkul_list = SilPengisi::all();
+        return DataTables::of($matkul_list)
+                            ->addColumn('action', function ($row) use ($dosen,$dosen_matkul_list) {
+                                $actionBtn = view('partial.select2_dosen',['dosen'=>$dosen,'list_dosen'=>$dosen_matkul_list,'selected'=>$row]);
+                                return $actionBtn;
+                            })
+                            ->rawColumns(['action'])
+                            ->make(true);
+    }
+
+    public function slctddosenjurusan($kode,$jurusan)
+    {
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                                    $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                        ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                                })
+                                ->join('sil_pengisi',function ($e)
+                                {
+                                    $e->on('sil_pengisi.mk_kodebaa','aka_matkul_kurikulum.mk_kodebaa')
+                                        ->on('sil_pengisi.kurikulum_kode','aka_matkul_kurikulum.kurikulum_kode');
+                                })
+                                ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                                ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                                ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                                ->where('sil_pengisi.dosen_kode',$kode)
+                                ->where('aka_jurusan.jur_kode',$jurusan)
+                                ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "aka_matkul_kurikulum.kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode")
+                                ->groupBy('aka_matkul_kurikulum.mk_kodebaa','matkul_nama','mk_semester','jur_nama','aka_matkul_kurikulum.kurikulum_kode');
+        $dosen = TkDosen::where('dosen_status', '1')
+                ->join('Tk_Karyawan', 'Tk_Karyawan.karyawan_nip', 'Tk_Dosen.karyawan_nip')
+                ->where('dosen_nama_sk', '!=', '')
+                ->orderBy('tk_karyawan.karyawan_nama','asc')
+                ->get();
+        $dosen_matkul_list = SilPengisi::all();
+
+        return DataTables::of($matkul_list)
+                ->addColumn('action', function ($row) use ($dosen,$dosen_matkul_list) {
+                    $actionBtn = view('partial.select2_dosen',['dosen'=>$dosen,'list_dosen'=>$dosen_matkul_list,'selected'=>$row]);
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+    }
+
+    public function listmatkulkajur($jurusan)
+    {
+        $matkul_list = AkaKelas::join('aka_matkul_kurikulum', function ($q) {
+                            $q->on('aka_matkul_kurikulum.mk_kode', 'aka_kelas.mk_kode')
+                                ->on('aka_matkul_kurikulum.jur_kode', 'aka_kelas.jur_kode');
+                        })
+                        ->join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                        ->join('tk_dosen', 'aka_kelas.dosen_kode', 'tk_dosen.dosen_kode')
+                        ->join('aka_jurusan', 'aka_jurusan.jur_kode', 'aka_kelas.jur_kode')
+                        ->where('aka_jurusan.jur_kode',$jurusan)
+                        ->select("aka_matkul_kurikulum.mk_kodebaa", "matkul_nama", "mk_semester", "jur_nama", "kurikulum_kode", "dosen_nama_sk","tk_dosen.dosen_kode")
+                        ->groupBy('mk_kodebaa','matkul_nama','mk_semester','jur_nama','kurikulum_kode');
+
+        $dosen = TkDosen::where('dosen_status', '1')
+                        ->join('Tk_Karyawan', 'Tk_Karyawan.karyawan_nip', 'Tk_Dosen.karyawan_nip')
+                        ->where('dosen_nama_sk', '!=', '')
+                        ->orderBy('tk_karyawan.karyawan_nama','asc')
+                        ->get();
+
+        $dosen_matkul_list = SilPengisi::all();
+        return DataTables::of($matkul_list)
+                        ->addColumn('action', function ($row) use ($dosen,$dosen_matkul_list) {
+                            $actionBtn = view('partial.select2_dosen',['dosen'=>$dosen,'list_dosen'=>$dosen_matkul_list,'selected'=>$row]);
+                            return $actionBtn;
+                        })
+                        ->rawColumns(['action'])
+                        ->make(true);
+    }
     public function assign(Request $request)
     {
         $now = AkaPeriode::PeriodeSkrg();
-        SilPengisi::create([
-            'mk_kodebaa' =>$request->mk_kodebaa,
-            'periode_kode'=>$now->periode_kode,
-            'dosen_kode'=>$request->dosen_kode,
-            'kurikulum_kode'=>$request->kurikulum_kode,
-            'pengisi_penugas'=>'admin'
-        ]);
-        $hasil = [
-                    'message'=>'Sukses mengganti dosen',
-                    'status'=>200,
-                    "payload"=>[
-                        "mk_kodebaa" => $request->mk_kodebaa,
-                        "dosen_kode" => $request->dosen_kode,
-                        "now" => $now->periode_kode
-                    ]
-                ];
+        $namadosen = TkDosen::where('dosen_kode',$request->dosen_kode)->first();
+        $result = SilPengisi::where('mk_kodebaa',$request->mk_kodebaa)
+                                ->where('kurikulum_kode',$request->kurikulum_kode)
+                                ->first();
+        $hasil="";
+        if ($result==null){
+            SilPengisi::create([
+                'mk_kodebaa' =>$request->mk_kodebaa,
+                'periode_kode'=>$now->periode_kode,
+                'dosen_kode'=>$request->dosen_kode,
+                'kurikulum_kode'=>$request->kurikulum_kode,
+                'pengisi_penugas'=>'admin'
+            ]);
+            $hasil = ['message'=>'Sukses assign '.$request->matkul_nama.' dengan '.$namadosen->dosen_nama_sk];
+        }
+        else {
+            SilPengisi::where('mk_kodebaa',$request->mk_kodebaa)
+                        ->where('kurikulum_kode',$request->kurikulum_kode)
+                        ->update(['dosen_kode'=>$request->dosen_kode]);
+            $hasil = ['message'=>'Berhasil ganti '.$request->matkul_nama.' dengan '.$namadosen->dosen_nama_sk];
+
+        }
         echo json_encode($hasil);
     }
 }

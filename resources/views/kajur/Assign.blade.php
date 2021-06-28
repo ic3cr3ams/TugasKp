@@ -1,108 +1,128 @@
 @extends('kajur/MasterKajur')
 @section('body')
 <section id="main-content">
+        <input type="hidden" value="{{$jurusan}}" id="jurusan">
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Assign Dosen Pengisi Silabus</h3>
-        <!-- row -->
-        <div class="row mt">
-            <div class="col-md-12">
-                <div>
-                    <form>
-                        <div class="input-group mb-3 col-sm-4" style="">
-                            <input type="text" class="form-control" placeholder="Mata Kuliah" aria-label="Mata Kuliah" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-success" style="background-color:rgb(155, 238, 155)" type="button"><i class="fa fa-search"></i></button>
-                            </div>
-                          </div>
-                    </form>
-                
+        <div class="row">
+            <div class="col-12 mt-3">
+                <h3><i class="fa fa-users"></i> Assign Dosen Pengisi Silabus</h3>
             </div>
-                <div class="content-panel"style="border-radius: 25px;">
+            <div class="col-12 px-4">
+                <div class="content-panel row" style="border-radius: 25px;">
                     <form class="col-sm-10">
                         <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
                         <div class="form-group row">
                             <div class="col-sm-9">
-                                <select class="form-control form-control-md">
-                                    <option>Small select</option>
-                                  </select>
+                                <select class="select2 form-control form-control-md" style="border-radius: 25px;" id="dosen">
+                                    @foreach ($listdosen as $atr)
+                                        <option value={{ $atr->dosen_kode }}>{{ $atr->dosen_nama_sk }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                          </div>
-                          <label style="color: black;font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
-                          <div class="form-group row">
-                              <div class="col-sm-4">
-                              <label>
-                                  <input type="checkbox" value="">
-                                   Tampilkan Mata Kuliah yang telah memiliki Dosen
-                                  </label>
-                              </div>
-                              <div class="col-sm-4">
-                                  <label>
-                                      <input type="checkbox" value="">
-                                       Tampilkan Mata Kuliah yang dimiliki oleh Dosen sekarang
-                                      </label>
-                              </div>
+                        </div>
+                        <label style="color: black;font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label>
+                                    <input type="checkbox" id="matkulkosong" >
+                                    Tampilkan Mata Kuliah yang telah memiliki Dosen
+                                </label>
                             </div>
+                            <div class="col-sm-4">
+                                <label>
+                                    <input type="checkbox" id="matkuldosen">
+                                    Tampilkan Mata Kuliah yang dimiliki oleh Dosen sekarang
+                                </label>
+                            </div>
+                        </div>
                     </form>
-                    <table class="table table-striped table-advance table-hover">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Mata Kuliah</th>
-                                <th>Semester</th>
-                                <th>Program Studi</th>
-                                <th>Kurikulum</th>
-                                <th>Dosen</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <input type="checkbox" value="">
-                            </td>
-                            <td>Nama Matkul
-                            </td>
-                            <td>Lorem Ipsum</td>
-                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                            <td>Lorem Ipsum</td>
-                            <td style="color: red"><b>Belum Memiliki Dosen</b></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" value="" disabled>
-                            </td>
-                            <td>Nama Matkul
-                            </td>
-                            <td>Lorem Ipsum</td>
-                            <td class="hidden-phone">Lorem Ipsum dolor</td>
-                            <td>Lorem Ipsum</td>
-                            <td><b> Hartarto Junaedi</b></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /content-panel -->
-                <br>
-                <div class="col-sm-5">
-                    <a href="/admin/tambahPaket"><button type="submit" class="btn btn-primary" style="border-radius: 25px;"><i class="fa fa-save"></i> Simpan</button></a>
+
+                    <div class="col-12">
+                        <table class="table table-bordered stripe yajra-datatable " style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Kode Mata Kuliah</th>
+                                    <th>Mata Kuliah</th>
+                                    <th>Semester</th>
+                                    <th>Program Studi</th>
+                                    <th>Kurikulum</th>
+                                    <th>Nama Dosen</th>
+                                    <th>Pengisi Silabus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- /row -->
     </section>
 </section>
-    <!-- /MAIN CONTENT -->
-    <!--main content end-->
-    <!--footer start-->
-  <!-- js placed at the end of the document so the pages load faster -->
-  <script src="{{asset('asset/admin/lib/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('asset/admin/lib/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script class="include" type="text/javascript" src="{{asset('asset/admin/lib/jquery.dcjqaccordion.2.7.js')}}"></script>
-  <script src="{{asset('asset/admin/lib/jquery.scrollTo.min.js')}}"></script>
-  <script src="{{asset('asset/admin/lib/jquery.nicescroll.js')}}" type="text/javascript"></script>
-  <!--common script for all pages-->
-  <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
-  <!--script for this page-->
+<script>
+    $('#matkulkosong').click(function(e) {
+        if (!$('#matkuldosen').is(':checked')) {
+            if ($('#matkulkosong').is(':checked')){
+                url ="{{ url('api/matkul/pengisikosongjurusan') }}";
+                var jurusan=$('#jurusan').val();
+                var table = $('.yajra-datatable').DataTable().ajax.url(url+"/"+jurusan);
+            }
+            else{
+                var jurusan=$('#jurusan').val();
+                var url = "{{ url('api/matkul/listmatkulkajur/') }}";
+                url = url+"/"+jurusan;
+                var table = $('.yajra-datatable').DataTable().ajax.url(url);
+            }
+        }
+        $('.yajra-datatable').DataTable().ajax.reload();
+    })
+    $('#matkuldosen').click(function(e) {
+        if ($('#matkuldosen').is(':checked')) {
+            var kodedosen = $('#dosen').val();
+            var jurusan=$('#jurusan').val();
+            url ="{{ url('api/matkul/slctddosenjurusan/') }}";
+            url =url+"/"+kodedosen+"/"+jurusan;
+            var table = $('.yajra-datatable').DataTable().ajax.url(url);
+        }
+        else{
+            var jurusan=$('#jurusan').val();
+                var url = "{{ url('api/matkul/listmatkulkajur/') }}";
+                url = url+"/"+jurusan;
+                var table = $('.yajra-datatable').DataTable().ajax.url(url);
+        }
+        $('.yajra-datatable').DataTable().ajax.reload();
+    })
 
-
-
+</script>
+<script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
   @endsection
+
+
+@push('js')
+<script>
+    var hasil=$('#jurusan').val();
+    var url = "{{ url('api/matkul/listmatkulkajur/') }}";
+    url = url+"/"+hasil;
+    $(function () {
+        var table = $('.yajra-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: url,
+            columns: [
+                {data: 'mk_kodebaa', name: 'aka_matkul_kurikulum.mk_kodebaa'},
+                {data: 'matkul_nama', name: 'aka_matkul.matkul_nama'},
+                {data: 'mk_semester', name: 'aka_matkul_kurikulum.mk_semester'},
+                {data: 'jur_nama', name: 'aka_jurusan.jur_nama'},
+                {data: 'kurikulum_kode', name: 'aka_matkul_kurikulum.kurikulum_kode'},
+                {data: 'dosen_nama_sk', name: 'tk_dosen.dosen_nama_sk'},
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
+            ]
+        });
+    });
+</script>
+@endpush

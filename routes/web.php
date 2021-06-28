@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\warekcontroller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Api\MatkulController;
+use App\Http\Controllers\IsiSilabus;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ Route::get('/', function () {
 Route::post('login', [LoginController::class,'login']);
 Route::get('logout',[LoginController::class,'logout']);
 
-Route::prefix("/admin")->group(function() {
+Route::prefix("/admin")->middleware('AdminStatus')->group(function() {
     Route::get('home', [AdminController::class,'home']);
     Route::post('pilihdosen', [AdminController::class,'pilihdosen']);
     Route::get('matakuliah',[AdminController::class,'matakuliah']);
@@ -37,38 +38,45 @@ Route::prefix("/admin")->group(function() {
     Route::get('Deskripsi', [AdminController::class,'Deskripsi']);
 });
 
-Route::prefix("/dosen")->group(function() {
+Route::prefix("/dosen")->middleware('DosenStatus')->group(function() {
     Route::get('home', [DosenController::class,'home']);
-    Route::get('cetak', function () {return view('dosen.cetak');});
+    Route::get('cetak', [DosenController::class,'cetak']);
+    Route::get('silabus/{kodedosen}/{mkkodebaa}/{periode}/{bahasa}', [IsiSilabus::class,'silabus']);
     Route::get('unduh', [DosenController::class,'Unduh']);
 });
 
-Route::prefix("/kajur")->group(function() {
+Route::prefix("/kajur")->middleware('KajurStatus')->group(function() {
+    Route::get('cetak', [KajurController::class,'cetak']);
     Route::get('home', [KajurController::class,'home']);
     Route::post('filterkajur', [KajurController::class,'filterkajur']);
-    Route::get('assign', function () {return view('kajur.Assign');});
-    Route::get('cetak', function () {return view('kajur.cetak');});
-    Route::get('verifikasi', function () {return view('kajur.verifikasi');});
+    Route::get('assign', [KajurController::class,'assign']);
     Route::get('matkulkajur', [KajurController::class,'matkulkajur']);
-    Route::post('filtermatkulkajur', [KajurController::class,'filtermatkulkajur']);
+    Route::get('silabus/{kodedosen}/{mkkodebaa}/{periode}/{bahasa}', [IsiSilabus::class,'silabus']);
     Route::get('unduh', [KajurController::class,'Unduh']);
+    Route::get('verifikasi', [KajurController::class,'verifikasi']);
 });
 
-Route::prefix("/dekan")->group(function() {
+Route::prefix("/dekan")->middleware('DekanStatus')->group(function() {
     Route::post('filtermatkuldekan', [DekanController::class,'filtermatkuldekan']);
     Route::get('matkuldekan', [DekanController::class,'matkuldekan']);
-    Route::get('cetak', function () {return view('dekan.cetak');});
+    Route::get('matkuljurusan', [DekanController::class,'matkuljurusan']);
+    Route::get('assign', [DekanController::class,'assign']);
+    Route::get('cetak', [DekanController::class,'cetak']);
+    Route::get('silabus/{kodedosen}/{mkkodebaa}/{periode}/{bahasa}', [IsiSilabus::class,'silabus']);
     Route::get('export', function () {return view('dekan.export');});
+    Route::get('verifikasi', function () {return view('dekan.verifikasi');});
     Route::get('home', [DekanController::class,'home']);
     Route::post('filterdekanhome', [DekanController::class,'filterdekanhome']);
     Route::get('unduh', [DekanController::class,'Unduh']);
     Route::get('export', [DekanController::class,'Export']);
 });
 
-Route::prefix("/wakil")->group(function() {
+Route::prefix("/wakil")->middleware('WakilStatus')->group(function() {
     Route::get('home', [warekcontroller::class,'home']);
+    Route::get('cetak', [warekcontroller::class,'cetak']);
     Route::get('matkulwarek', [warekcontroller::class,'matkulwarek']);
     Route::get('dekanwarek', [warekcontroller::class,'dekanwarek']);
+    Route::get('silabus/{kodedosen}/{mkkodebaa}/{periode}/{bahasa}', [IsiSilabus::class,'silabus']);
     Route::post('filtermatakuliah', [warekcontroller::class,'filtermatakuliah']);
     Route::post('filterwarek', [warekcontroller::class,'filterwarek']);
     Route::post('filterdekan', [warekcontroller::class,'filterdekan']);
@@ -76,4 +84,5 @@ Route::prefix("/wakil")->group(function() {
     Route::get('Export', [DekanController::class,'Export']);
 });
 
-Route::get("sialbusind",function(){return view('dosen.addsilabusIndo');});
+Route::post("fill",[IsiSilabus::class,'fill']);
+Route::post("verif",[IsiSilabus::class,'verif']);

@@ -14,17 +14,16 @@
           <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
           <div class="row fileupload-buttonbar">
             <div class="col-lg-8">
-              <select class="form-control" style="border-radius: 25px;">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-              <br>
-              <button type="submit" class="btn btn-info ">
-                <i class="fa fa-print"></i>
-                <span>Cetak PDF</span>
+                <select class="form-control select2" name="mk_kodebaa">
+                    @foreach ($kelass as $item)
+                        <option value="{{$item->mk_kodeebaa}}{{$item->kurikulum_kode}}">{{$item->matkul_nama}} - {{$item->kurikulum_kode}}</option>
+                    @endforeach
+                </select>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-info ">
+                    <i class="fa fa-print"></i>
+                    <span>Cetak PDF</span>
                 </button>
             </div>
           </div>
@@ -33,8 +32,7 @@
       </div>
     </div>
   </section>
-    <!-- /wrapper -->
-  </section>
+</section>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
@@ -47,7 +45,4 @@
   <!--common script for all pages-->
   <script src="{{asset('asset/admin/lib/common-scripts.js')}}"></script>
   <!--script for this page-->
-
-
-
   @endsection

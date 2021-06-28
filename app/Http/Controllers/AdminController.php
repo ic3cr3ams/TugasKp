@@ -47,27 +47,19 @@ class AdminController extends Controller
             }
         }
     }
+
     public function matakuliah(Request $request)
     {
         Session::forget("jurusan");
         Session::forget("kurikulum");
-        $now = AkaPeriode::PeriodeSkrg();
         $jurusan=AkaJurusan::select('jur_nama','jur_kode')->get();
         $studi= AkaMatkulKurikulum::select("kurikulum_kode")->distinct()->get();
-        $semua =  AkaKelas::where('periode_kode',$now->periode_kode)
-                            ->join('aka_matkul_kurikulum',function($q){
-                                $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
-                                ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
-                            })
-                            ->join('aka_matkul','aka_matkul.matkul_id','aka_matkul_kurikulum.matkul_id')
-                            ->join('tk_dosen','aka_kelas.dosen_kode','tk_dosen.dosen_kode')
-                            ->get();
         return view('admin.matakuliah',[
             "studi" => $studi,
-            "jurusan" => $jurusan,
-            "semua" => $semua
+            "jurusan" => $jurusan
         ]);
     }
+
     public function filtermatakuliah(Request $request)
     {
         $kurikulum = $request -> krklm;
@@ -128,23 +120,11 @@ class AdminController extends Controller
         Session::forget("kurikulum");
         $dosen = TkDosen::where('dosen_status','1')
                             ->join('Tk_Karyawan','Tk_Karyawan.karyawan_nip','Tk_Dosen.karyawan_nip')
-                            ->leftJoin('sil_pengisi','sil_pengisi.dosen_kode','tk_dosen.dosen_kode')
                             ->where('dosen_nama_sk','!=','')
                             ->orderBy('tk_karyawan.karyawan_nama','asc')
-                            ->select('*')
-                            ->selectRaw('count(sil_pengisi.dosen_kode) as jumlah')
                             ->groupBy('tk_dosen.dosen_kode')
                             ->get();
-<<<<<<< Updated upstream
 
-=======
-        $datajumlah = db::table('sil_dosen_makul')
-                            ->select(db::raw('count(kode_dosen) as jumlah,kode_dosen'))
-                            ->where('periode_kode',$now->periode_kode)
-                            ->groupby('kode_dosen')
-                            ->get();
-        // dd($datajumlah);
->>>>>>> Stashed changes
         return view('admin.Assign',[
             "listdosen" => $dosen
         ]);

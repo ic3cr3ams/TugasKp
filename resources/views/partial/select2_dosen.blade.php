@@ -3,7 +3,7 @@
 id="select2_{{ $selected->mk_kodebaa }}_{{ $selected->kurikulum_kode }}"
 data-mk_kodebaa='{{ $selected->mk_kodebaa }}'
 data-kurikulum_kode='{{ $selected->kurikulum_kode }}'
-data-matkul_nama="{{$selected->matkul_nama}}">
+data-matkul_nama='{{$selected->matkul_nama}}'>
 
     <option value="Pilih Dosen">Pilih Dosen</option>
 
@@ -33,12 +33,13 @@ data-matkul_nama="{{$selected->matkul_nama}}">
             }
             console.log($(this).data('mk_kodebaa'));
             console.log($(this).data('kurikulum_kode'));
+            console.log($(this).data('matkul_nama'));
             console.log($(this).val());
-
             $.post('{{ url("api/matkul/assign") }}',
                     {
                         'mk_kodebaa':$(this).data('mk_kodebaa'),
                         'kurikulum_kode':$(this).data('kurikulum_kode'),
+                        'matkul_nama':$(this).data('matkul_nama'),
                         'dosen_kode':$(this).val(),
                     }
                     ,
@@ -46,7 +47,7 @@ data-matkul_nama="{{$selected->matkul_nama}}">
                         console.log(data);
 
                         data = $.parseJSON(data);
-                        alert(data.message +"dengan ");
+                        alert(data.message);
                     }
             );
         });
