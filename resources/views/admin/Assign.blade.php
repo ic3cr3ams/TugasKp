@@ -3,56 +3,53 @@
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
-            <div class="col-12 mt-3">
+            <div class="col-12 mt-10">
                 <h3><i class="fa fa-users"></i> Assign Dosen Pengisi Silabus</h3>
             </div>
             <div class="col-12 px-4">
-                <div class="content-panel row" style="border-radius: 25px;">
-                    <form class="col-sm-10">
-                        <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
-                        <div class="form-group row">
-                            <div class="col-sm-9">
-                                <select class="select2 form-control form-control-md" style="border-radius: 25px;" id="dosen">
-                                    @foreach ($listdosen as $atr)
-                                        <option value={{ $atr->dosen_kode }}>{{ $atr->dosen_nama_sk }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                <div class="content-panel" style="border-radius: 25px;">
+                    <div class="col-12">
+                    <label style="color: black; font-size:15pt;"><b>Pilih Dosen</b></label>
+                    <div class="form-group row">
+                        <div class="col-sm-9">
+                            <select class="select2 form-control form-control-md" style="border-radius: 25px;" id="dosen">
+                                @foreach ($listdosen as $atr)
+                                    <option value={{ $atr->dosen_kode }}>{{ $atr->dosen_nama_sk }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <label style="color: black;font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <label>
-                                    <input type="checkbox" id="matkulkosong" >
-                                    Tampilkan Mata Kuliah yang telah memiliki Dosen
-                                </label>
-                            </div>
-                            <div class="col-sm-4">
-                                <label>
-                                    <input type="checkbox" id="matkuldosen">
-                                    Tampilkan Mata Kuliah yang dimiliki oleh Dosen sekarang
-                                </label>
-                            </div>
-                        </form>
-
-                        <div class="col-12">
-                            <table class="table table-bordered yajra-datatable stripe" style="width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <th>Kode Mata Kuliah</th>
-                                        <th>Mata Kuliah</th>
-                                        <th>Semester</th>
-                                        <th>Program Studi</th>
-                                        <th>Kurikulum</th>
-                                        <th>Nama Dosen</th>
-                                        <th>Pengisi Silabus</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                    </div>
+                    <label style="color: black;font-size:15pt;"><i class="fa fa-filter"></i> <b>Filter</b></label>
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label>
+                                <input type="checkbox" id="matkulkosong" >
+                                Tampilkan Mata Kuliah yang telah memiliki Dosen
+                            </label>
                         </div>
-                    </form>
+                        <div class="col-sm-4">
+                            <label>
+                                <input type="checkbox" id="matkuldosen">
+                                Tampilkan Mata Kuliah yang dimiliki oleh Dosen sekarang
+                            </label>
+                        </div>
+                    </div>
+                        <table class="table table-bordered yajra-datatable stripe" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Kode Mata Kuliah</th>
+                                    <th>Mata Kuliah</th>
+                                    <th>Semester</th>
+                                    <th>Program Studi</th>
+                                    <th>Kurikulum</th>
+                                    <th>Nama Dosen</th>
+                                    <th>Pengisi Silabus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
             </div>
         </div>
     </section>
