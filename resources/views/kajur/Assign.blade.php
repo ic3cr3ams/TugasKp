@@ -63,13 +63,13 @@
     $('#matkulkosong').click(function(e) {
         if (!$('#matkuldosen').is(':checked')) {
             if ($('#matkulkosong').is(':checked')){
-                url ="{{ url('api/matkul/pengisikosongjurusan') }}";
+                url ="{{ url('/matkul/pengisikosongjurusan') }}";
                 var jurusan=$('#jurusan').val();
                 var table = $('.yajra-datatable').DataTable().ajax.url(url+"/"+jurusan);
             }
             else{
                 var jurusan=$('#jurusan').val();
-                var url = "{{ url('api/matkul/listmatkulkajur/') }}";
+                var url = "{{ url('matkul/listmatkulkajur/') }}";
                 url = url+"/"+jurusan;
                 var table = $('.yajra-datatable').DataTable().ajax.url(url);
             }
@@ -80,13 +80,13 @@
         if ($('#matkuldosen').is(':checked')) {
             var kodedosen = $('#dosen').val();
             var jurusan=$('#jurusan').val();
-            url ="{{ url('api/matkul/slctddosenjurusan/') }}";
+            url ="{{ url('matkul/slctddosenjurusan/') }}";
             url =url+"/"+kodedosen+"/"+jurusan;
             var table = $('.yajra-datatable').DataTable().ajax.url(url);
         }
         else{
             var jurusan=$('#jurusan').val();
-                var url = "{{ url('api/matkul/listmatkulkajur/') }}";
+                var url = "{{ url('matkul/listmatkulkajur/') }}";
                 url = url+"/"+jurusan;
                 var table = $('.yajra-datatable').DataTable().ajax.url(url);
         }
@@ -101,7 +101,7 @@
 @push('js')
 <script>
     var hasil=$('#jurusan').val();
-    var url = "{{ url('api/matkul/listmatkulkajur/') }}";
+    var url = "{{ url('matkul/listmatkulkajur/') }}";
     url = url+"/"+hasil;
     $(function () {
         var table = $('.yajra-datatable').DataTable({

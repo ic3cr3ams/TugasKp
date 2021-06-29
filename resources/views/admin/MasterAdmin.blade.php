@@ -70,13 +70,13 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a href="/admin/Pengisian">
+                    <a class="{{ (url()->current() == url("/admin/report")) ? 'active' : '' }}" href="/admin/report">
                     <i class="fa fa-download"></i>
                     <span> Report Pengisian Silabus </span>
                 </a>
                 </li>
                 <li class="sub-menu">
-                    <a href="/admin/Deskripsi">
+                    <a class="{{ (url()->current() == url("/admin/export")) ? 'active' : '' }}" href="/admin/export">
                     <i class="fa fa-external-link-square"></i>
                     <span> Export Silabus</span>
                     </a>
@@ -84,18 +84,6 @@
             </div>
         </aside>
         @yield('body')
-        <footer class="site-footer">
-            <div class="text-center">
-                <p>
-
-                </p>
-                <div class="credits">
-                </div>
-                <a href="" class="go-top">
-                    <i class="fa fa-angle-up"></i>
-                </a>
-            </div>
-        </footer>
     </section>
     <script src="{{asset('asset/admin/lib/jquery.niceScroll.js')}}" type="text/javascript"></script>
     <script src="{{ asset('asset/admin/lib/jquery/jquery.min.js') }}"></script>

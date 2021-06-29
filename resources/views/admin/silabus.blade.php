@@ -48,7 +48,7 @@
             <section class="wrapper">
                 @foreach ($status as $item)
                 @if ($bahasa=="i") <input type="hidden" id="status" onchange="isistatus()" value="{{$item->sd_status_ind}}">
-                @else <input type="hidden" id="status" value="{{$item->sd_status_eng}}">
+                @else <input type="hidden" id="status" onchange="isistatus()" value="{{$item->sd_status_eng}}">
                 @endif
                 @endforeach
                 <br>

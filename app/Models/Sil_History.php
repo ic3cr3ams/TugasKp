@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sil_History extends BaseModel
 {
-	protected $table = 'sil_data';
-	protected $primaryKey = 'dosen_kode';
-	public $incrementing = false;
-	public $timestamps = false;
+	protected $table = 'sil_history';
+	protected $primaryKey = 'id_silhistory';
+	public $incrementing = true;
+	public $timestamps = true;
+
+    protected $fillable = ['dosen_nama_sk','isi'];
 }

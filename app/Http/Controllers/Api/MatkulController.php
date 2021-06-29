@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\AkaKelas;
 use App\Models\AkaPeriode;
+use App\Models\Sil_History;
 use App\Models\SilPengisi;
 use App\Models\TkDosen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\DataTables;
 
 
@@ -236,29 +238,42 @@ class MatkulController extends Controller
     }
     public function assign(Request $request)
     {
+        if (Session::get('admin')) $nama_dosen = "Admin";
+        else{
+            $nama_dosen = TkDosen::where('dosen_kode',Auth::user()->kodeDosen)->first();
+        }
         $now = AkaPeriode::PeriodeSkrg();
         $namadosen = TkDosen::where('dosen_kode',$request->dosen_kode)->first();
         $result = SilPengisi::where('mk_kodebaa',$request->mk_kodebaa)
                                 ->where('kurikulum_kode',$request->kurikulum_kode)
                                 ->first();
-        $hasil="";
         if ($result==null){
             SilPengisi::create([
                 'mk_kodebaa' =>$request->mk_kodebaa,
                 'periode_kode'=>$now->periode_kode,
                 'dosen_kode'=>$request->dosen_kode,
                 'kurikulum_kode'=>$request->kurikulum_kode,
-                'pengisi_penugas'=>'admin'
+                'pengisi_penugas'=>$nama_dosen->dosen_nama_sk
             ]);
             $hasil = ['message'=>'Sukses assign '.$request->matkul_nama.' dengan '.$namadosen->dosen_nama_sk];
+            $isi = "Assign ".$request->matkul_nama.' dengan '.$namadosen->dosen_nama_sk;
         }
         else {
+            $nama_dosen_awal = TkDosen::join('sil_pengisi','sil_pengisi.dosen_kode','tk_dosen.dosen_kode')
+                                        ->where('sil_pengisi.kurikulum_kode',$request->kurikulum_kode)
+                                        ->where('sil_pengisi.mk_kodebaa',$request->mk_kodebaa)
+                                        ->first();
             SilPengisi::where('mk_kodebaa',$request->mk_kodebaa)
                         ->where('kurikulum_kode',$request->kurikulum_kode)
                         ->update(['dosen_kode'=>$request->dosen_kode]);
-            $hasil = ['message'=>'Berhasil ganti '.$request->matkul_nama.' dengan '.$namadosen->dosen_nama_sk];
-
+            $hasil = ['message'=>'Berhasil ganti '.$nama_dosen_awal->dosen_nama_sk.' dengan '.$namadosen->dosen_nama_sk];
+            $isi ="Mengganti ".$nama_dosen_awal->dosen_nama_sk." pengisi silabus ".$request->matkul_nama.' dengan '.$namadosen->dosen_nama_sk;
         }
+
+        Sil_History::create([
+            "dosen_nama_sk" =>$nama_dosen->dosen_nama_sk,
+            "isi" => $isi
+        ]);
         echo json_encode($hasil);
     }
 }

@@ -98,15 +98,15 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a href="/dekan/Unduh">
-                    <i class="fa fa-download"></i>
-                    <span> Unduh Pedoman Silabus</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
                     <a href="/dekan/Export">
                     <i class="fa fa-external-link" aria-hidden="true"></i>
                     <span>Export Data Silabus</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{{ asset('Pedoman/Pedoman.pptx') }}" download>
+                        <i class="fa fa-download"></i>
+                        <span>Unduh Pedoman Silabus</span>
                     </a>
                 </li>
             </div>

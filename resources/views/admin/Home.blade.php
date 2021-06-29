@@ -29,14 +29,30 @@
                 </form>
                 <h4 class="mb"><i class="fa fa-upload"></i> Upload Pedoman Silabus</h4>
                 <div class="form-group">
-                    <div class="controls col-md-9">
-                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                        <span class="btn btn-theme02 btn-file btn-round ">
-                            <input type="file"/>
-                        </span>
-                        <span class="fileupload-preview" style="margin-left:5px;"></span>
-                    </div>
-                    </div>
+                    <form action="{{ url('doUpload') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="controls col-md-9">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <span class="btn btn-theme02 btn-file btn-round ">
+                                    <input type="file" name="myFile" id="">
+                                    <input type="submit" value="Uploadkan">
+                                </span>
+                                <span class="fileupload-preview" style="margin-left:5px;"></span>
+                            </div>
+                        </div>
+                    </form>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $err)
+                            <div> {{ $err }} </div>
+                        @endforeach
+                    @endif
+                    @if (\Session::has('success'))
+                        <div class="alert alert-success">
+                            <ul>
+                                <li>{!! \Session::get('success') !!}</li>
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 </div>
             </div>

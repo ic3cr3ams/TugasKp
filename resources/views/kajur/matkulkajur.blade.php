@@ -111,14 +111,14 @@
                                         var kodebaa = $(this).attr('name').slice(0,5);
                                         var periode = $(this).attr('name').slice(5,9);
                                         var dosen_kode =  $('#dosen_kode').val();
-                                        var url = "{{ url('dosen/silabus') }}";
+                                        var url = "{{ url('kajur/silabus') }}";
                                         window.open(url+"/"+dosen_kode+"/"+kodebaa+"/"+periode+"/i");
                                     })
                                     $('#{{$kelas->mk_kodebaa.$kelas->kurikulum_kode}}e').click(function(e) {
                                         var kodebaa = $(this).attr('name').slice(0,5);
                                         var kurikulum_kode = $(this).attr('name').slice(5,9);
                                         var dosen_kode =  $('#dosen_kode').val();
-                                        var url = "{{ url('dosen/silabus') }}";
+                                        var url = "{{ url('kajur/silabus') }}";
                                         window.open(url+"/"+dosen_kode+"/"+kodebaa+"/"+kurikulum_kode+"/e");
                                     })
                                 </script>

@@ -88,15 +88,15 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/wakil/unduh")) ? 'active' : '' }}" href="/wakil/unduh">
-                    <i class="fa fa-download"></i>
-                    <span> Unduh Pedoman Silabus</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
                     <a class="{{ (url()->current() == url("/wakil/verifikasi")) ? 'active' : '' }}" href="/wakil/verifikasi">
                     <i class="fa fa-external-link" aria-hidden="true"></i>
                     <span>Export Data Silabus</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{{ asset('Pedoman/Pedoman.pptx') }}" download>
+                        <i class="fa fa-download"></i>
+                        <span>Unduh Pedoman Silabus</span>
                     </a>
                 </li>
             </div>

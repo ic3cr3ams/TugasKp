@@ -9,6 +9,7 @@ use App\Models\AkaKelas;
 use App\Models\AkaPeriode;
 use App\Models\SilPengisi;
 use App\Models\TkDosen;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class KajurController extends Controller
@@ -171,6 +172,7 @@ class KajurController extends Controller
     }
     public function assign(Type $var = null)
     {
+        // dd(Auth::user());
         Session::forget("jurusan");
         Session::forget("kurikulum");
         $dosen = TkDosen::where('dosen_status','1')

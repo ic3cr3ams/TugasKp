@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\AkaMatkul;
 use App\Models\AkaMatkulKurikulum;
 use App\Models\Sil_Data;
+use App\Models\Sil_History;
 use App\Models\SilPengisi;
+use App\Models\TkDosen;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class IsiSilabus extends Controller
 {
     public function silabus($kode_dosen,$mk_kodebaa,$kurikulum_kode,$bahasa)
-    {   
+    {
         if ($bahasa=="i") {
             $status =  SilPengisi::where('mk_kodebaa',$mk_kodebaa)
                                 ->where('kurikulum_kode',$kurikulum_kode)
@@ -126,11 +128,26 @@ class IsiSilabus extends Controller
         else $rb4 =  $request->rb4;
         if ($request->rb5==null) $rb5="";
         else $rb5 =  $request->rb5;
+
         $materi = $request->materi;
         $tujuan = $request->tujuan;
         $status = $request->status;
         $mk_kodebaa = $request->mk_kodebaa;
         $kurikulum_kode = $request->kurikulum_kode;
+        $matkul_nama = AkaMatkul::join('aka_matkul_kurikulum','aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                                ->where('aka_matkul_kurikulum.kurikulum_kode',$kurikulum_kode)
+                                ->where('aka_matkul_kurikulum.mk_kodebaa',$mk_kodebaa)
+                                ->get('matkul_nama');
+        foreach ($matkul_nama as $key => $value) {
+            $matkul_nama = $value->matkul_nama;
+        }
+        if (Auth::user()->kodeDosen==null) $nama_dosen = "Admin";
+        else{
+            $nama_dosen = TkDosen::where('dosen_kode',Auth::user()->kodeDosen)->get('dosen_nama_sk');
+            foreach ($nama_dosen as $key => $value) {
+                $nama_dosen = $value->dosen_nama_sk;
+            }
+        }
         if ($request->bahasa=="i") {
             $bahasa = "Indonesia";
 
@@ -164,14 +181,12 @@ class IsiSilabus extends Controller
                 "rb_5"=>$rb5,
             ]);
             $r="Sukses mengisi silabus";
-
+            $isi ="Mengisi data silabus ".$matkul_nama."bahasa ".$bahasa;
         }else {
             Sil_Data::where('kurikulum_kode',$kurikulum_kode)
                     ->where('mk_kodebaa',$mk_kodebaa)
+                    ->where('bahasa',$bahasa)
                     ->update([
-                        "mk_kodebaa"=>$mk_kodebaa,
-                        "bahasa"=>$bahasa,
-                        "kurikulum_kode"=>$kurikulum_kode,
                         'materi' =>$materi,
                         'tujuan' =>$tujuan,
                         "tm_1"=>$tm1,
@@ -195,6 +210,7 @@ class IsiSilabus extends Controller
                         "rb_5"=>$rb5,
                     ]);
             $r = "Update berhasil";
+            $isi = "Mengubah data silabus ".$matkul_nama." bahasa ".$bahasa;
         }
         if ($bahasa=="Indonesia") {
             SilPengisi::where('kurikulum_kode',$kurikulum_kode)
@@ -209,6 +225,10 @@ class IsiSilabus extends Controller
                             "sd_status_eng" =>1
                         ]);
         }
+        Sil_History::create([
+            "dosen_nama_sk" =>$nama_dosen,
+            "isi" => $isi
+        ]);
         $result =[
             "hasil" =>$r,
             "value" =>1,
@@ -222,11 +242,22 @@ class IsiSilabus extends Controller
         else $bahasa = "inggris";
         if($request->status=="3")   {if ($request->bahasa=="i") $resp = ["sd_status_ind"=>'3'];
                                     else $resp = ["sd_status_eng"=>"3"];
-                                    $msg = "Berhasil verifikasi silabus bahasa ".$bahasa." ".$request->matkul_nama;}
+                                    $msg = "Berhasil verifikasi silabus bahasa ".$bahasa." ".$request->matkul_nama;
+                                    $isi = "Memverifikasi silabus bahasa ".$bahasa." ".$request->matkul_nama;}
         else    {if ($request->bahasa=="i") $resp = ["sd_status_ind"=>'2'];
                 else $resp = ["sd_status_eng"=>'2'];
-                $msg="Berhasil Tolak";}
+                $msg="Berhasil Tolak silabus bahasa ".$bahasa." ".$request->matkul_nama;
+                $isi = "Menolak silabus bahasa ".$bahasa." ".$request->matkul_nama;}
 
+        $nama_dosen = TkDosen::where('dosen_kode',Auth::user()->kodeDosen)->get('dosen_nama_sk');
+        foreach ($nama_dosen as $key => $value) {
+            $nama_dosen = $value->dosen_nama_sk;
+        }
+
+        Sil_History::create([
+            "dosen_nama_sk" =>$nama_dosen,
+            "isi" => $isi
+        ]);
         SilPengisi::where('mk_kodebaa',$request->mk_kodebaa)
                     ->where('kurikulum_kode',$request->kurikulum_kode)
                     ->update($resp);

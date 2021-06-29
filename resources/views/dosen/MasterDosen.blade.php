@@ -58,9 +58,9 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a  href="/dosen/Unduh">
-                    <i class="fa fa-download"></i>
-                    <span>Unduh Pedoman Silabus</span>
+                    <a href="{{ asset('Pedoman/Pedoman.pptx') }}" download>
+                        <i class="fa fa-download"></i>
+                        <span>Unduh Pedoman Silabus</span>
                     </a>
                 </li>
             </div>

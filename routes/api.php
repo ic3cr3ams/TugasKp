@@ -23,5 +23,7 @@ Route::prefix('matkul')->group(function(){
     Route::get('listmatkulkajur/{jurusan}', [MatkulController::class, 'listmatkulkajur']);
     Route::get('slctddosenjurusan/{kodedosen}/{jurusan}', [MatkulController::class, 'slctddosenjurusan']);
     Route::get('pengisikosongjurusan/{jurusan}', [MatkulController::class, 'pengisikosongjurusan']);
-    Route::post('assign', [MatkulController::class, 'assign']);
+    Route::post('matkul/assign', [MatkulController::class, 'assign']);
+
 });
+Route::post('matkul/assign', [MatkulController::class, 'assign'])->middleware(['auth:api']);

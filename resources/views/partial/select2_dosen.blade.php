@@ -35,8 +35,9 @@ data-matkul_nama='{{$selected->matkul_nama}}'>
             console.log($(this).data('kurikulum_kode'));
             console.log($(this).data('matkul_nama'));
             console.log($(this).val());
-            $.post('{{ url("api/matkul/assign") }}',
+            $.post('{{ url("matkul/assign") }}',
                     {
+                        "_token": "{{ csrf_token() }}",
                         'mk_kodebaa':$(this).data('mk_kodebaa'),
                         'kurikulum_kode':$(this).data('kurikulum_kode'),
                         'matkul_nama':$(this).data('matkul_nama'),

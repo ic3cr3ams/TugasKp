@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\datajurusan;
+use App\Exports\history;
 use App\Models\AkaJurusan;
 use App\Models\AkaKelas;
 use App\Models\AkaMatkulKurikulum;
@@ -15,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -103,8 +106,7 @@ class AdminController extends Controller
         }elseif($kurikulum!= "all" && $jrsn != "all"){
             $now = AkaPeriode::PeriodeSkrg();
             $studi= AkaMatkulKurikulum::select("kurikulum_kode")->distinct()->get();
-            $semua =  AkaKelas::where('periode_kode',$now->periode_kode)
-                                ->join('aka_matkul_kurikulum',function($q){
+            $semua =  AkaKelas::join('aka_matkul_kurikulum',function($q){
                                     $q->on('aka_matkul_kurikulum.mk_kode','aka_kelas.mk_kode')
                                     ->on('aka_matkul_kurikulum.jur_kode','aka_kelas.jur_kode');
                                 })
@@ -156,6 +158,7 @@ class AdminController extends Controller
                                         ->where('aka_matkul_kurikulum.kurikulum_kode',$kurikulum_kode)
                                         ->get();
         $nama =         $nama = TkDosen::where('dosen_kode',$dosen_kode)->get('dosen_nama_sk');
+        // dd($status);
         return view('admin.silabus',[
             "kodedosen" => $dosen_kode,
             "mk_kodebaa" =>$mk_kodebaa,
@@ -167,6 +170,39 @@ class AdminController extends Controller
             "nama" => $nama
         ]);
     }
-    public function Deskripsi(Request $input){}
-    public function Pengisian(Request $input){}
+    public function doUpload(Request $request)
+    {
+        $request->validate(
+            ['myFile' => 'required|mimes:pdf,docx,doc,png,jpg,ppt,pptx']
+        );
+        $nama = 'Pedoman.'.$request->file('myFile')->getClientOriginalExtension();;
+        $path =$request->file('myFile')->move('Pedoman', $nama);
+        return redirect()->back()->with('success','Berhasil upload file pedoman silabus');
+    }
+    public function report(Request $input){
+        return view('admin.report');
+    }
+    public function xlsx(Type $var = null)
+    {
+        return Excel::download(new history, 'history.xlsx');
+
+    }
+    public function csv(Type $var = null)
+    {
+        return Excel::download(new history, 'history.csv');
+    }
+    public function export(Type $var = null)
+    {
+        Session::forget("jurusan");
+        Session::forget("kurikulum");
+        $jurusan=AkaJurusan::select('jur_nama','jur_kode')->get();
+        return view('admin.export',[
+            "jurusan" => $jurusan
+        ]);
+    }
+    public function reportxlsx(Request $request)
+    {
+        return Excel::download(new datajurusan($request->username), 'data.xlsx');
+
+    }
 }

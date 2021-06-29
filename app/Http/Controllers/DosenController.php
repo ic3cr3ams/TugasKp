@@ -63,6 +63,8 @@ class DosenController extends Controller
             "kelass"=>$matkul_list
         ]);
     }
-    public function Unduh(Request $input){}
+    public function unduh(Request $input){
+        return view('dosen.unduh');
+    }
 
 }
