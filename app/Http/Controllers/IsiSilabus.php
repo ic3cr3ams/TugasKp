@@ -266,4 +266,12 @@ class IsiSilabus extends Controller
         ];
         echo json_encode($hasil);
     }
+
+    public function cetak(Request $request)
+    {
+        return view('pdf');
+
+    }
+
+
 }

@@ -51,6 +51,7 @@ Route::prefix("/dosen")->middleware('DosenStatus')->group(function() {
 });
 
 Route::prefix("/kajur")->middleware('KajurStatus')->group(function() {
+    Route::get('cetakpdf', [KajurController::class,'cetakpdf']);
     Route::get('cetak', [KajurController::class,'cetak']);
     Route::get('home', [KajurController::class,'home']);
     Route::post('filterkajur', [KajurController::class,'filterkajur']);
@@ -59,9 +60,11 @@ Route::prefix("/kajur")->middleware('KajurStatus')->group(function() {
     Route::get('silabus/{kodedosen}/{mkkodebaa}/{periode}/{bahasa}', [IsiSilabus::class,'silabus']);
     Route::get('unduh', [KajurController::class,'Unduh']);
     Route::get('verifikasi', [KajurController::class,'verifikasi']);
+    Route::get('reportxlsx', [KajurController::class,'reportxlsx']);
 });
 
 Route::prefix("/dekan")->middleware('DekanStatus')->group(function() {
+    Route::get('cetakpdf', [DekanController::class,'cetakpdf']);
     Route::post('filtermatkuldekan', [DekanController::class,'filtermatkuldekan']);
     Route::get('matkuldekan', [DekanController::class,'matkuldekan']);
     Route::get('matkuljurusan', [DekanController::class,'matkuljurusan']);
@@ -73,10 +76,13 @@ Route::prefix("/dekan")->middleware('DekanStatus')->group(function() {
     Route::get('home', [DekanController::class,'home']);
     Route::post('filterdekanhome', [DekanController::class,'filterdekanhome']);
     Route::get('unduh', [DekanController::class,'Unduh']);
-    Route::get('export', [DekanController::class,'Export']);
+    Route::get('export', [DekanController::class,'export']);
+    Route::get('reportxlsx', [AdminController::class,'reportxlsx']);
 });
 
 Route::prefix("/wakil")->middleware('WakilStatus')->group(function() {
+    Route::get('reportxlsx', [AdminController::class,'reportxlsx']);
+    Route::get('cetakpdf', [warekcontroller::class,'cetakpdf']);
     Route::get('home', [warekcontroller::class,'home']);
     Route::get('cetak', [warekcontroller::class,'cetak']);
     Route::get('matkulwarek', [warekcontroller::class,'matkulwarek']);
@@ -85,8 +91,8 @@ Route::prefix("/wakil")->middleware('WakilStatus')->group(function() {
     Route::post('filtermatakuliah', [warekcontroller::class,'filtermatakuliah']);
     Route::post('filterwarek', [warekcontroller::class,'filterwarek']);
     Route::post('filterdekan', [warekcontroller::class,'filterdekan']);
+    Route::get('export', [warekcontroller::class,'export']);
     Route::get('Unduh', [DekanController::class,'Unduh']);
-    Route::get('export', [DekanController::class,'export']);
 });
 Route::prefix('matkul')->group(function(){
     Route::get('slctddosen/{kodedosen}', [MatkulController::class, 'slctddosen']);
@@ -104,3 +110,5 @@ Route::prefix('matkul')->group(function(){
 Route::post("fill",[IsiSilabus::class,'fill']);
 Route::post("verif",[IsiSilabus::class,'verif']);
 Route::post('doUpload', [AdminController::class,'doUpload']);
+Route::get('pdf',[IsiSilabus::class,'cetak']);
+Route::get('cetakpdf',[IsiSilabus::class,'cetakpdf']);

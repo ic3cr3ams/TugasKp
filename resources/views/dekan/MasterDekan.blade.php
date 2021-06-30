@@ -98,9 +98,9 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a href="/dekan/Export">
-                    <i class="fa fa-external-link" aria-hidden="true"></i>
-                    <span>Export Data Silabus</span>
+                    <a class="{{ (url()->current() == url("/dekan/export")) ? 'active' : '' }}" href="/dekan/export">
+                    <i class="fa fa-external-link-square"></i>
+                    <span> Export Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">

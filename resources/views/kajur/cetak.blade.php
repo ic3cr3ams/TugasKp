@@ -5,26 +5,30 @@
     <h3><i class="fa fa fa-print"></i>Cetak PDF Silabus</h3>
     <div class="row mt">
     <div class="col-lg-12">
-        <!-- The file upload form used as target for the file upload widget -->
+        {{-- <!-- The file upload form used as target for the file upload widget -->
         <form id="fileupload" action="http://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
         <!-- Redirect browsers with JavaScript disabled to the origin page -->
         <noscript>
             <input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/">
             </noscript>
-        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload --> --}}
+        {{-- {{dd($kelass)}} --}}
         <div class="row fileupload-buttonbar">
             <div class="col-lg-8">
-                <select class="form-control select2" name="mk_kodebaa">
-                    @foreach ($kelass as $item)
-                        <option value="{{$item->mk_kodeebaa}}{{$item->kurikulum_kode}}">{{$item->matkul_nama}} - {{$item->kurikulum_kode}}</option>
-                    @endforeach
-                </select>
-            <br>
-            <br>
-            <button type="submit" class="btn btn-info ">
-                <i class="fa fa-print"></i>
-                <span>Cetak PDF</span>
-                </button>
+                <form action="cetakpdf" method="get">
+                    @csrf
+                    <select class="form-control select2" name="kode">
+                        @foreach ($kelass as $item)
+                            <option value="{{$item->mk_kodebaa.$item->kurikulum_kode}}">{{$item->matkul_nama}} - {{$item->kurikulum_kode}}</option>
+                        @endforeach
+                    </select>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-info ">
+                        <i class="fa fa-print"></i>
+                        <span>Cetak PDF</span>
+                        </button>
+                </form>
             </div>
         </div>
         </form>

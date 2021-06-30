@@ -8,9 +8,14 @@ use App\Models\AkaJurusan;
 use App\Models\AkaKelas;
 use App\Models\AkaMatkulKurikulum;
 use App\Models\AkaPeriode;
+use App\Models\Sil_Data;
 use App\Models\SilPengisi;
 use App\Models\TkDosen;
 use Illuminate\Support\Facades\Session;
+
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Str;
+use PDF;
 
 class DekanController extends Controller
 {
@@ -334,5 +339,36 @@ class DekanController extends Controller
         ]);
     }
     public function Unduh(Request $input){}
-    public function Export(Request $input){}
+    public function export(Request $input){
+        $jurjur = Auth::user()->jurusanKajur;
+        $jurusan = Auth::user()->jurusanDekan;
+        Session::forget("jurusan");
+        Session::forget("kurikulum");
+        return view('dekan.export',[
+            "jurusan" => $jurusan,
+            "jurjur" => $jurjur
+        ]);
+    }
+    public function reportxlsx(Request $request)
+    {
+        return Excel::download(new datajurusan($request->username), 'data.xlsx');
+
+    }
+
+
+    public function cetakpdf(Request $request)
+    {
+        $mk_kodebaa = Str::substr($request->kode, 0, 5);
+        $kurikulum = Str::substr($request->kode, 5, 9);
+        $data = Sil_Data::where('mk_kodebaa',$mk_kodebaa)
+                        ->where('kurikulum_kode',$kurikulum)
+                        ->get();
+        $matkul_nama = AkaMatkulKurikulum::join('aka_matkul', 'aka_matkul.matkul_id', 'aka_matkul_kurikulum.matkul_id')
+                                            ->where('aka_matkul_kurikulum.kurikulum_kode',$kurikulum)
+                                            ->where('mk_kodebaa',$mk_kodebaa)
+                                            ->first();
+                                            // dd($matkul_nama);
+        $pdf = PDF::loadview('pdf',['silabus'=>$data,"nama"=>$matkul_nama]);
+        return $pdf->stream();
+    }
 }

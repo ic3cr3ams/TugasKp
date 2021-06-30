@@ -88,9 +88,9 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a class="{{ (url()->current() == url("/wakil/verifikasi")) ? 'active' : '' }}" href="/wakil/verifikasi">
-                    <i class="fa fa-external-link" aria-hidden="true"></i>
-                    <span>Export Data Silabus</span>
+                    <a class="{{ (url()->current() == url("/wakil/export")) ? 'active' : '' }}" href="/wakil/export">
+                    <i class="fa fa-external-link-square"></i>
+                    <span> Export Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">

@@ -43,7 +43,7 @@
             </div>
         <!--logo start-->
             {{-- <img src="{{asset('asset/admin/img/logo-istts.png')}}" alt="" srcset="" class="rounded float-left"> --}}
-            <a href="index.html" class="logo"><b><span><img src="{{asset(('images/stts.png'))}}" class="float-center" width="40" height="40"></span><span> Silabus ISTTS</span> </b></a>
+            <a href="#" class="logo"><b><span><img src="{{asset(('images/stts.png'))}}" class="float-center" width="40" height="40"></span><span> Silabus ISTTS</span> </b></a>
             <!--logo end-->
 
             <ul class="nav pull-right top-menu">
@@ -92,6 +92,12 @@
                     <a class="{{ (url()->current() == url("/kajur/cetak")) ? 'active' : '' }}" href="/kajur/cetak">
                         <i class="fa fa-print" aria-hidden="true"></i>
                     <span>Cetak PDF Silabus</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{{ url('kajur/reportxlsx') }}" >
+                        <i class="fa fa-external-link-square"></i>
+                        <span> Export Silabus</span>
                     </a>
                 </li>
                 <li class="sub-menu">
